@@ -15,6 +15,7 @@ public class Main {
         deck.sortDeck();
         deck.sortDeck(SortMethods.symbol);
         deck.sortDeck(SortMethods.suite);
+        deck.shuffleDeck();
 
     }
 }

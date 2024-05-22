@@ -4,6 +4,8 @@ import org.example.utils.SortMethods;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
     private String[] suites = new String[] {"♣", "♦", "❤", "♠" };
@@ -57,5 +59,17 @@ public class Deck {
         System.out.println(deck);
     }
 
+    public void shuffleDeck() {
+        ArrayList<Card> shuffleDeck = new ArrayList<>();
+        while (!deck.isEmpty()) {
+            int selectIndex = (int) Math.floor(Math.random()* deck.size());
+            shuffleDeck.add(deck.get(selectIndex));
+            deck.remove(selectIndex);
+        }
+        deck = shuffleDeck;
+        System.out.println("Random sort: ");
+        System.out.println(deck);
+        System.out.println(deck.size());
+    }
 
 }
