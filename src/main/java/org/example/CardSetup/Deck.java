@@ -72,4 +72,21 @@ public class Deck {
         System.out.println(deck.size());
     }
 
+    public void resetDeck() {
+        ArrayList<Card> freshDeck = new ArrayList<>();
+        for (String s : suites) {
+            for (int i=0; i<symbols.length; i++) {
+                freshDeck.add(new Card(symbols[i], s, values[i]));
+            }
+        }
+        deck = freshDeck;
+        System.out.println(deck);
+    }
+
+    public void printDeck() {
+        for (Card card : deck) {
+            System.out.println(card);
+        }
+    }
+
 }
