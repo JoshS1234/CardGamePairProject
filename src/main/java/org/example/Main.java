@@ -30,6 +30,7 @@ public class Main {
         System.out.println("Compare suites: " + CompareCards.compareCards(cardThree, cardFour));
         System.out.println("No comparison: " + CompareCards.compareCards(cardFive, cardSix));
 
+        //Needs to be moved to some kind of command runner
         Snap snap = new Snap("Snap", "Be quickest to match cards");
         snap.play();
     }

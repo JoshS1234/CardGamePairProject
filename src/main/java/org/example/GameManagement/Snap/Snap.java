@@ -4,17 +4,19 @@ import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
 import org.example.GameManagement.Game;
 import org.example.utils.CompareCards;
+import org.example.utils.SortMethods;
 
 public class Snap extends Game {
 
-    private Card cardOne;
-    private Card cardTwo;
+    //Create instance of deck
     private Deck deck = new Deck();
 
+    //Constructor
     public Snap(String title, String rules) {
         super(title, rules);
     }
 
+    //Overrides from game class
     @Override
     public void play() {
         dealCards();
@@ -25,17 +27,21 @@ public class Snap extends Game {
         return false;
     }
 
-    //Need a player and a computer
-
-    //Need to use deal card method to grab cards
+    //Shuffle deck and deal cards
     public void dealCards() {
-        cardOne = deck.dealCard();
-        cardTwo = deck.dealCard();
-        System.out.println("Cards match = " + CompareCards.compareCards(cardOne, cardTwo));
+        deck.shuffleDeck();
+        Card cardOne = deck.dealCard();
+        Card cardTwo = deck.dealCard();
+
+        //Sout for testing
+        System.out.println("Card one: " + cardOne + ". Card two: " + cardTwo + ". Cards suite match = " + CompareCards.compareCards(cardOne, cardTwo, SortMethods.suite));
     }
 
-    //Need a method to check if current card and last card match
+    //Need a method to check if current card and last card match - NOT YET IMPLEMENTED
+    //Store dealt card as current card
+    //If no match store as last card and deal new card
+    //Repeat
 
-    //Need a method to listen for player input on match
+    //Need a method to listen for player input on match - User Interaction - NOT YET IMPLEMENTED
 
 }
