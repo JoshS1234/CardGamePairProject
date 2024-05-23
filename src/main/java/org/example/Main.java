@@ -14,25 +14,25 @@ import java.util.ArrayList;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-//        Card card = new Card("2", "heart");
-//        Card cardTwo = new Card("2", "diamond");
-//        Card cardThree = new Card("2", "heart");
-//        Card cardFour = new Card("4", "heart");
-//        Card cardFive = new Card("2", "heart");
-//        Card cardSix = new Card("4", "diamond");
-//        //System.out.println(card);
-//
-//        Deck deck = new Deck();
-//        deck.sortDeck();
-//        deck.sortDeck(SortMethods.symbol);
-//        deck.sortDeck(SortMethods.suite);
-//        deck.shuffleDeck();
-//        deck.resetDeck();
-//        deck.printDeck();
-//
-//        System.out.println("Compare symbols: " + CompareCards.compareCards(card, cardTwo));
-//        System.out.println("Compare suites: " + CompareCards.compareCards(cardThree, cardFour));
-//        System.out.println("No comparison: " + CompareCards.compareCards(cardFive, cardSix));
+        Card card = new Card("2", "heart");
+        Card cardTwo = new Card("2", "diamond");
+        Card cardThree = new Card("2", "heart");
+        Card cardFour = new Card("4", "heart");
+        Card cardFive = new Card("2", "heart");
+        Card cardSix = new Card("4", "diamond");
+        //System.out.println(card);
+
+        Deck deck = new Deck();
+        deck.sortDeck();
+        deck.sortDeck(SortMethods.symbol);
+        deck.sortDeck(SortMethods.suite);
+        deck.shuffleDeck();
+        deck.resetDeck();
+        deck.printDeck();
+
+        System.out.println("Compare symbols: " + CompareCards.compareCards(card, cardTwo));
+        System.out.println("Compare suites: " + CompareCards.compareCards(cardThree, cardFour));
+        System.out.println("No comparison: " + CompareCards.compareCards(cardFive, cardSix));
 
 
         PokerHand testPokerHand = new PokerHand();
@@ -50,8 +50,8 @@ public class Main {
 
 
 
-//        //Needs to be moved to some kind of command runner
-//        Snap snap = new Snap("Snap", "Be quickest to match cards");
-//        snap.play();
+        //Needs to be moved to some kind of command runner
+        Snap snap = new Snap("Snap", "Be quickest to match cards");
+        snap.play();
     }
 }
