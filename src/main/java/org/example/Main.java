@@ -1,17 +1,25 @@
 package org.example;
 
+import org.example.CardSetup.Card;
+import org.example.CardSetup.Deck;
+import org.example.utils.SortMethods;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Card card = new Card("2", "heart", 2);
+        //System.out.println(card);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Deck deck = new Deck();
+        deck.sortDeck();
+        deck.sortDeck(SortMethods.symbol);
+        deck.sortDeck(SortMethods.suite);
+        deck.shuffleDeck();
+        deck.resetDeck();
+        deck.printDeck();
+
+
+
     }
 }
