@@ -5,6 +5,7 @@ import org.example.CardSetup.Deck;
 import org.example.GameManagement.Game;
 import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
+import org.example.utils.UserInteraction;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -46,30 +47,26 @@ public class Snap extends Game {
 
         while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
         {
+            System.out.println();
             dealPlayerCard();
             if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
                 break;
             }
             dealComputerCard();
         }
-        System.out.println("CARDS MATCH!");
-        long start = System.currentTimeMillis();
-        TimeUnit.MILLISECONDS.sleep(500);
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
+        System.out.println("CARDS MATCH! PRESS ENTER QUICKLY!");
+        try {
+            if (UserInteraction.userCall(2)) {
+                System.out.println("You win.");
+            } else {
+                System.out.println("You lose.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
 
-        //Sout for testing
-        //If(playerSnaps()) {
-        //  sout("Snap! You win!")
-        //}
-        //else {
-        // sout("Computer says snap!)
-        //}
         System.out.println("User Card: " + userCard + ". Computer card: " + computerCard + ". Cards suite match = " + CompareCards.compareCards(userCard, computerCard, SortMethods.suite));
     }
-
-    //Need a method to listen for player input on match - User Interaction - NOT YET IMPLEMENTED
-
 
     //Deal card to player
     public void dealPlayerCard () throws InterruptedException {
@@ -86,5 +83,4 @@ public class Snap extends Game {
         computerCard = deck.dealCard();
         System.out.println("Computer card: " + computerCard);
     }
-
 }
