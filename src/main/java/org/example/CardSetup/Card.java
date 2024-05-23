@@ -75,6 +75,4 @@ public class Card {
         return this.symbol + " of " + this.suite;
     }
 
-
-
 }

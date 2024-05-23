@@ -36,20 +36,21 @@ public class Main {
 
         PokerHand testPokerHand = new PokerHand();
         testPokerHand.add(new Card("A", "heart"));
-        testPokerHand.add(new Card("A", "spade"));
-        testPokerHand.add(new Card("2", "heart"));
-        testPokerHand.add(new Card("2", "club"));
+        testPokerHand.add(new Card("2", "spade"));
         testPokerHand.add(new Card("3", "heart"));
-        testPokerHand.add(new Card("3", "club"));
+        testPokerHand.add(new Card("4", "club"));
+        testPokerHand.add(new Card("5", "heart"));
+        testPokerHand.add(new Card("10", "club"));
         testPokerHand.add(new Card("K", "heart"));
         System.out.println(testPokerHand.pokerHand);
+        System.out.println(PokerHandChecker.StraightCheck(testPokerHand));
 
 
 
 
 
-        //Needs to be moved to some kind of command runner
-        Snap snap = new Snap("Snap", "Be quickest to match cards");
-        snap.play();
+//        //Needs to be moved to some kind of command runner
+//        Snap snap = new Snap("Snap", "Be quickest to match cards");
+//        snap.play();
     }
 }
