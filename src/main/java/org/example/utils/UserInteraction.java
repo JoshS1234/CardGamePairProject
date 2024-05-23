@@ -2,58 +2,24 @@ package org.example.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class UserInteraction {
 
-    private static String userInput;
-    private static boolean hasPlayerSnapped = true;
-
-    //Check if player inputs something within a timeframe
-    static TimerTask userHitsEnter = new TimerTask() {
-        @Override
-        public void run() {
-            try {
-                if (!userInput.isEmpty()) {
-                    System.out.println("Wah wah.");
-                }
-            } catch (Exception e) {
-                hasPlayerSnapped = false;
-            }
-        }
-    };
-
-    public static void getInput() throws Exception {
-        Timer timer = new Timer();
-        timer.schedule(userHitsEnter, 1000);
-
-        System.out.println("Quick hit enter!");
+    //Look for user input within x seconds
+    public static boolean userCall(long seconds) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        userInput = in.readLine();
+        long startTime = System.currentTimeMillis();
+        while ((System.currentTimeMillis() - startTime) < seconds * 1000 && !in.ready()) {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }
 
-        timer.cancel();
-        System.out.println(hasPlayerSnapped);
+        if (in.ready()) {
+            System.out.println("Input received");
+            return true;
+        } else {
+            System.out.println("No input received.");
+            return false;
+        }
     }
-
-
-//    public boolean playerSnaps(Scanner scanner) {
-//        TimerTask userHitsEnter = new TimerTask() {
-//            @Override
-//            public void run() {
-//                String readString = scanner.nextLine();
-//                if(readString.isEmpty()) {
-//                    System.out.println("Oh no!");
-//                    hasPlayerSnapped = false;
-//                }
-//            }
-//        };
-//
-//        public void getInput() {
-//
-//        };
-//
-//        return hasPlayerSnapped;
-//    }
 }

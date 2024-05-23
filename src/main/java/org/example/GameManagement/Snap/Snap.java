@@ -7,11 +7,7 @@ import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
 import org.example.utils.UserInteraction;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class Snap extends Game {
@@ -59,7 +55,7 @@ public class Snap extends Game {
         }
         System.out.println("CARDS MATCH!");
         try {
-            if (userSnap()) {
+            if (UserInteraction.userCall(2)) {
                 System.out.println("You win.");
             } else {
                 System.out.println("You lose.");
@@ -70,8 +66,6 @@ public class Snap extends Game {
 
         System.out.println("User Card: " + userCard + ". Computer card: " + computerCard + ". Cards suite match = " + CompareCards.compareCards(userCard, computerCard, SortMethods.suite));
     }
-
-    //Need a method to listen for player input on match - User Interaction - NOT YET IMPLEMENTED
 
     //Deal card to player
     public void dealPlayerCard () throws InterruptedException {
@@ -87,23 +81,6 @@ public class Snap extends Game {
         TimeUnit.SECONDS.sleep(1);
         computerCard = deck.dealCard();
         System.out.println("Computer card: " + computerCard);
-    }
-
-
-    public boolean userSnap() throws Exception {
-        int x = 2;
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        long startTime = System.currentTimeMillis();
-        while ((System.currentTimeMillis() - startTime) < x * 1000 && !in.ready()) {}
-
-        if (in.ready()) {
-            System.out.println("Input received");
-            return true;
-        } else {
-            System.out.println("No input received.");
-            return false;
-        }
     }
 
 }
