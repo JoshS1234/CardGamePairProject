@@ -17,6 +17,7 @@ public class Snap extends Game {
     private Card userCard;
     private Card computerCard;
     private Scanner scanner = new Scanner(System.in);
+    private boolean hasPlayed = false;
 
     //Constructor
     public Snap(String title, String rules) {
@@ -35,37 +36,57 @@ public class Snap extends Game {
 
     @Override
     public boolean playAgain() {
-        return false;
+        String userInput;
+
+        if (!hasPlayed) {
+            System.out.println("Playing game.");
+            hasPlayed = true;
+            return true;
+        } else {
+            System.out.println("Want to play again?");
+            userInput = scanner.nextLine();
+            while (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n"))
+            {
+                System.out.println("Sorry I didn't catch that. Please select y or n: ");
+                userInput = scanner.nextLine();
+            }
+
+            return userInput.equalsIgnoreCase("y");
+        }
     }
 
     //Shuffle deck and deal cards
     public void handleGameLoop() throws InterruptedException {
 
-        deck.shuffleDeck();
-        dealPlayerCard();
-        dealComputerCard();
-
-        while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
-        {
-            System.out.println();
+        while(playAgain()) {
+            deck.shuffleDeck();
             dealPlayerCard();
-            if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
-                break;
-            }
             dealComputerCard();
-        }
-        System.out.println("CARDS MATCH! PRESS ENTER QUICKLY!");
-        try {
-            if (UserInteraction.userCall(2)) {
-                System.out.println("You win.");
-            } else {
-                System.out.println("You lose.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
 
-        System.out.println("User Card: " + userCard + ". Computer card: " + computerCard + ". Cards suite match = " + CompareCards.compareCards(userCard, computerCard, SortMethods.suite));
+            while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
+            {
+                System.out.println();
+                dealPlayerCard();
+                if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
+                    break;
+                }
+                dealComputerCard();
+            }
+
+            System.out.println("CARDS MATCH! PRESS ENTER QUICKLY!");
+
+            try {
+                if (UserInteraction.userCall(2)) {
+                    System.out.println("You win.");
+                } else {
+                    System.out.println("You lose.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
+
+            System.out.println("User Card: " + userCard + ". Computer card: " + computerCard + ". Cards suite match = " + CompareCards.compareCards(userCard, computerCard, SortMethods.suite));
+        }
     }
 
     //Deal card to player
