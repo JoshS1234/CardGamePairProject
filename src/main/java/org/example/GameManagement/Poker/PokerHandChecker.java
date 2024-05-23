@@ -11,6 +11,7 @@ public class PokerHandChecker {
     String bestHand;
     HashMap<Integer, ArrayList<Card>> handSplitByValue;
     HashMap<String, ArrayList<Card>> handSplitBySuite;
+    PokerHand bestFiveCards = new PokerHand();
 
     public static HashMap<Integer, ArrayList<Card>> splitByValue(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = new HashMap<>();
@@ -44,8 +45,40 @@ public class PokerHandChecker {
         return true;
     }
 
-    public boolean StraightFlushCheck() {
-        return true;
+    public static boolean StraightFlushCheck(PokerHand hand) {
+        int baseValue = 0;
+        boolean hasStraight = false;
+
+        for (int i=0; i<hand.pokerHand.size(); i++) {
+            int cardValue = hand.pokerHand.get(i).getValue();
+            int currBase;
+            if (cardValue==14) {
+                currBase=1;
+            } else {
+                currBase = cardValue;
+            }
+            String currSuite = hand.pokerHand.get(i).getSuite();
+            int count=1;
+            for (int j=1; j<5; j++) {
+                int finalJ = j;
+                if (hand.pokerHand.stream().anyMatch(card -> (card.getValue() == currBase + finalJ && card.getSuite().equals(currSuite)))) {
+                    ArrayList<Card> nextCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> card.getValue() == currBase + finalJ).collect(Collectors.toList());
+                    System.out.println(nextCards);
+                    count++;
+                }
+            }
+            if (count==5) {
+                if (currBase>baseValue) {
+                    System.out.println(currBase);
+                    hasStraight=true;
+                    baseValue=currBase;
+                }
+            }
+        }
+        if (hasStraight) {
+            System.out.println("Straight flush starting at: " + baseValue);
+        }
+        return hasStraight;
     }
 
     public static boolean FourOfAKindCheck(PokerHand hand) {
@@ -106,7 +139,13 @@ public class PokerHandChecker {
         boolean hasStraight = false;
 
         for (int i=0; i<hand.pokerHand.size(); i++) {
-            int currBase = hand.pokerHand.get(i).getValue();
+            int cardValue = hand.pokerHand.get(i).getValue();
+            int currBase;
+            if (cardValue==14) {
+                currBase=1;
+            } else {
+                currBase = cardValue;
+            }
             int count=1;
             for (int j=1; j<5; j++) {
                 int finalJ = j;

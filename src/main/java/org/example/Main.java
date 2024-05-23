@@ -37,20 +37,20 @@ public class Main {
 
         deck.shuffleDeck();
         PokerHand testPokerHand = new PokerHand();
-        testPokerHand.add(new Card("A", "diamond"));
+        testPokerHand.add(new Card("A", "heart"));
+        testPokerHand.add(new Card("2", "heart"));
         testPokerHand.add(new Card("3", "heart"));
+        testPokerHand.add(new Card("4", "heart"));
         testPokerHand.add(new Card("5", "heart"));
-        testPokerHand.add(new Card("5", "heart"));
-        testPokerHand.add(new Card("6", "heart"));
-        testPokerHand.add(new Card("7", "heart"));
         testPokerHand.add(new Card("8", "heart"));
+        testPokerHand.add(new Card("10", "heart"));
 
         System.out.println(PokerHandChecker.splitByValue(testPokerHand));
         System.out.println(PokerHandChecker.splitBySuite(testPokerHand));
         System.out.println(testPokerHand);
         testPokerHand.sortHand();
         System.out.println(testPokerHand);
-        System.out.println(PokerHandChecker.StraightCheck(testPokerHand));
+        System.out.println(PokerHandChecker.StraightFlushCheck(testPokerHand));
 
 
 
