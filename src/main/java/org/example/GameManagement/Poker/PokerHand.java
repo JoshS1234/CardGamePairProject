@@ -8,24 +8,40 @@ import java.util.Collections;
 
 public class PokerHand {
 
-    ArrayList<Card> pokerHand = new ArrayList<Card>();
+    public ArrayList<Card> pokerHand = new ArrayList<Card>();
+
+    public PokerHand() {
+        sortHand();
+        System.out.println(this.pokerHand);
+    }
 
     public PokerHand(ArrayList<Card> cards) {
-        pokerHand.addAll(cards);
+        this.pokerHand.addAll(cards);
         System.out.println(pokerHand);
+    }
+
+    public void add(Card card) {
+        this.pokerHand.add(card);
+    }
+
+    public Card removeCard(int index) {
+        Card dealtCard = pokerHand.get(index);
+        this.pokerHand.remove(index);
+        return dealtCard;
     }
 
     public void sortHand() {
         System.out.println("Sorted by value: ");
-        pokerHand.sort((a,b) -> a.getValue() - b.getValue());
-        System.out.println(pokerHand);
+        System.out.println(this.pokerHand);
+        Collections.sort(this.pokerHand,(a,b) -> a.getValue() - b.getValue());
+        System.out.println(this.pokerHand);
     }
 
     public void sortHand(SortMethods sortMethods) {
         switch (sortMethods){
             case suite:
                 System.out.println("Sorted by suite: ");
-                Collections.sort(pokerHand, (a,b) -> {
+                Collections.sort(this.pokerHand, (a,b) -> {
                     if(a.getSuite().compareTo(b.getSuite()) == 0) {
                         return a.getValue() - b.getValue();
                     }
@@ -34,7 +50,7 @@ public class PokerHand {
                 break;
             case symbol:
                 System.out.println("Sorted by symbol: ");
-                Collections.sort(pokerHand, (a,b) -> {
+                Collections.sort(this.pokerHand, (a,b) -> {
                     if(a.getSymbol().compareTo(b.getSymbol()) == 0) {
                         return a.getValue() - b.getValue();
                     }
@@ -42,20 +58,20 @@ public class PokerHand {
                 });
                 break;
         }
-        System.out.println(pokerHand);
+        System.out.println(this.pokerHand);
     }
 
     public void shuffleHand() {
         ArrayList<Card> shuffleDeck = new ArrayList<>();
-        while (!pokerHand.isEmpty()) {
-            int selectIndex = (int) Math.floor(Math.random()* pokerHand.size());
-            shuffleDeck.add(pokerHand.get(selectIndex));
-            pokerHand.remove(selectIndex);
+        while (!this.pokerHand.isEmpty()) {
+            int selectIndex = (int) Math.floor(Math.random()* this.pokerHand.size());
+            shuffleDeck.add(this.pokerHand.get(selectIndex));
+            this.pokerHand.remove(selectIndex);
         }
-        pokerHand = shuffleDeck;
+        this.pokerHand = shuffleDeck;
         System.out.println("Random sort: ");
-        System.out.println(pokerHand);
-        System.out.println(pokerHand.size());
+        System.out.println(this.pokerHand);
+        System.out.println(this.pokerHand.size());
     }
 
 
