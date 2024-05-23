@@ -17,7 +17,7 @@ public class Deck {
     public Deck() {
         for (String s : suites) {
             for (int i=0; i<symbols.length; i++) {
-                deck.add(new Card(symbols[i], s, values[i]));
+                deck.add(new Card(symbols[i], s));
             }
         }
         System.out.println(deck);
@@ -76,7 +76,7 @@ public class Deck {
         ArrayList<Card> freshDeck = new ArrayList<>();
         for (String s : suites) {
             for (int i=0; i<symbols.length; i++) {
-                freshDeck.add(new Card(symbols[i], s, values[i]));
+                freshDeck.add(new Card(symbols[i], s));
             }
         }
         deck = freshDeck;
