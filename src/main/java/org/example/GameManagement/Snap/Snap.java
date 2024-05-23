@@ -6,6 +6,7 @@ import org.example.GameManagement.Game;
 import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Snap extends Game {
@@ -14,6 +15,7 @@ public class Snap extends Game {
     private Deck deck = new Deck();
     private Card userCard;
     private Card computerCard;
+    private Scanner scanner = new Scanner(System.in);
 
     //Constructor
     public Snap(String title, String rules) {
@@ -50,8 +52,19 @@ public class Snap extends Game {
             }
             dealComputerCard();
         }
+        System.out.println("CARDS MATCH!");
+        long start = System.currentTimeMillis();
+        TimeUnit.MILLISECONDS.sleep(500);
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
 
         //Sout for testing
+        //If(playerSnaps()) {
+        //  sout("Snap! You win!")
+        //}
+        //else {
+        // sout("Computer says snap!)
+        //}
         System.out.println("User Card: " + userCard + ". Computer card: " + computerCard + ". Cards suite match = " + CompareCards.compareCards(userCard, computerCard, SortMethods.suite));
     }
 
@@ -60,16 +73,18 @@ public class Snap extends Game {
 
     //Deal card to player
     public void dealPlayerCard () throws InterruptedException {
-        userCard = deck.dealCard();
-        System.out.println("Card one: " + userCard);
         TimeUnit.SECONDS.sleep(1);
+        System.out.println("Press enter to take a card");
+        scanner.nextLine();
+        userCard = deck.dealCard();
+        System.out.println("User card: " + userCard);
     }
 
     //Deal card to computer
     public void dealComputerCard () throws InterruptedException {
-        computerCard = deck.dealCard();
-        System.out.println("Card one: " + computerCard);
         TimeUnit.SECONDS.sleep(1);
+        computerCard = deck.dealCard();
+        System.out.println("Computer card: " + computerCard);
     }
 
 }
