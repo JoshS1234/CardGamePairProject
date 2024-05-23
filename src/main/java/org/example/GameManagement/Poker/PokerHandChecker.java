@@ -67,10 +67,6 @@ public class PokerHandChecker {
         }
 
         hasRoyalFlush=hasStraightFlush && baseValue==10;
-        if (hasRoyalFlush) {
-            System.out.println("Royal flush starting at " + baseValue + " in the suite of " + outputSuite);
-        }
-
         return hasRoyalFlush;
     }
 
@@ -100,9 +96,6 @@ public class PokerHandChecker {
                     baseValue=currBase;
                 }
             }
-        }
-        if (hasStraightFlush) {
-            System.out.println("Straight flush starting at: " + baseValue);
         }
         return hasStraightFlush;
     }
@@ -142,7 +135,6 @@ public class PokerHandChecker {
 
             }
         }
-        System.out.println("3 of " + topValue1 + " and 2 of " + topValue2);
         return hasThreeOfAKind && hasPair;
     }
 
@@ -181,9 +173,6 @@ public class PokerHandChecker {
                     baseValue=currBase;
                 }
             }
-        }
-        if (hasStraight) {
-            System.out.println("Straight starting at: " + baseValue);
         }
         return hasStraight;
     }
@@ -224,7 +213,6 @@ public class PokerHandChecker {
                 }
             }
         }
-        System.out.println("Values are: " + topValue1 + " and " + topValue2);
         return hasTwoPair;
     }
 
