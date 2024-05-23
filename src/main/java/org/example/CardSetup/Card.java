@@ -39,7 +39,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return this.symbol + " of " + this.suite + " has value of " + this.value;
+        return this.symbol + " of " + this.suite;
     }
 
 }
