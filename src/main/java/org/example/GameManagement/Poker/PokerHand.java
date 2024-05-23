@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class PokerHand {
 
-    public ArrayList<Card> pokerHand = new ArrayList<Card>();
+    public ArrayList<Card> pokerHand = new ArrayList<>();
 
     public PokerHand() {
     }
@@ -28,15 +28,15 @@ public class PokerHand {
     }
 
     public void sortHand() {
-        Collections.sort(this.pokerHand,(a,b) -> a.getValue() - b.getValue());
+        this.pokerHand.sort((a, b) -> a.getValue() - b.getValue());
     }
 
     public void sortHand(SortMethods sortMethods) {
         switch (sortMethods){
             case suite:
                 System.out.println("Sorted by suite: ");
-                Collections.sort(this.pokerHand, (a,b) -> {
-                    if(a.getSuite().compareTo(b.getSuite()) == 0) {
+                this.pokerHand.sort((a, b) -> {
+                    if (a.getSuite().compareTo(b.getSuite()) == 0) {
                         return a.getValue() - b.getValue();
                     }
                     return a.getSuite().compareTo(b.getSuite());
@@ -44,8 +44,8 @@ public class PokerHand {
                 break;
             case symbol:
                 System.out.println("Sorted by symbol: ");
-                Collections.sort(this.pokerHand, (a,b) -> {
-                    if(a.getSymbol().compareTo(b.getSymbol()) == 0) {
+                this.pokerHand.sort((a, b) -> {
+                    if (a.getSymbol().compareTo(b.getSymbol()) == 0) {
                         return a.getValue() - b.getValue();
                     }
                     return a.getSymbol().compareTo(b.getSymbol());

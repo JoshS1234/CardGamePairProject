@@ -8,7 +8,6 @@ import org.example.GameManagement.Snap.Snap;
 import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
 
-import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -44,7 +43,6 @@ public class Main {
         testPokerHand.add(new Card("3", "club"));
         testPokerHand.add(new Card("K", "heart"));
         System.out.println(testPokerHand.pokerHand);
-        System.out.println(PokerHandChecker.TwoPairCheck(testPokerHand));
 
 
 

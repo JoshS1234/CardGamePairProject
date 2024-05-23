@@ -1,10 +1,7 @@
 package org.example.CardSetup;
 
-import java.util.HashMap;
-
 public class Card {
 
-    private HashMap<String, Integer> symbolValueMap = new HashMap<>();
     private String suite;
     private String symbol;
     private Integer value;
