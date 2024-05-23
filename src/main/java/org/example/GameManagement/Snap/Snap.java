@@ -47,13 +47,14 @@ public class Snap extends Game {
 
         while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
         {
+            System.out.println();
             dealPlayerCard();
             if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
                 break;
             }
             dealComputerCard();
         }
-        System.out.println("CARDS MATCH!");
+        System.out.println("CARDS MATCH! PRESS ENTER QUICKLY!");
         try {
             if (UserInteraction.userCall(2)) {
                 System.out.println("You win.");
@@ -82,5 +83,4 @@ public class Snap extends Game {
         computerCard = deck.dealCard();
         System.out.println("Computer card: " + computerCard);
     }
-
 }

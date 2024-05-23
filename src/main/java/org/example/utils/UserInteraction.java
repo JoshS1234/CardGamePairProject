@@ -14,12 +14,6 @@ public class UserInteraction {
             TimeUnit.MILLISECONDS.sleep(1);
         }
 
-        if (in.ready()) {
-            System.out.println("Input received");
-            return true;
-        } else {
-            System.out.println("No input received.");
-            return false;
-        }
+        return in.ready();
     }
 }
