@@ -11,13 +11,10 @@ public class PokerHand {
     public ArrayList<Card> pokerHand = new ArrayList<Card>();
 
     public PokerHand() {
-        sortHand();
-        System.out.println(this.pokerHand);
     }
 
     public PokerHand(ArrayList<Card> cards) {
         this.pokerHand.addAll(cards);
-        System.out.println(pokerHand);
     }
 
     public void add(Card card) {
@@ -31,10 +28,7 @@ public class PokerHand {
     }
 
     public void sortHand() {
-        System.out.println("Sorted by value: ");
-        System.out.println(this.pokerHand);
         Collections.sort(this.pokerHand,(a,b) -> a.getValue() - b.getValue());
-        System.out.println(this.pokerHand);
     }
 
     public void sortHand(SortMethods sortMethods) {

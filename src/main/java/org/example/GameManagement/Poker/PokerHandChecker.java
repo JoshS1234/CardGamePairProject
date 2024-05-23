@@ -11,7 +11,6 @@ public class PokerHandChecker {
     String bestHand;
     HashMap<Integer, ArrayList<Card>> handSplitByValue;
     HashMap<String, ArrayList<Card>> handSplitBySuite;
-    PokerHand bestFiveCards = new PokerHand();
 
     public static HashMap<Integer, ArrayList<Card>> splitByValue(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = new HashMap<>();
@@ -41,13 +40,11 @@ public class PokerHandChecker {
         return suiteMap;
     }
 
-    public boolean RoyalFlushCheck(ArrayList<Card> hand) {
-        return true;
-    }
-
-    public static boolean StraightFlushCheck(PokerHand hand) {
+    public static boolean RoyalFlushCheck(PokerHand hand) {
         int baseValue = 0;
-        boolean hasStraight = false;
+        boolean hasStraightFlush = false;
+        boolean hasRoyalFlush=false;
+        String outputSuite="";
 
         for (int i=0; i<hand.pokerHand.size(); i++) {
             int cardValue = hand.pokerHand.get(i).getValue();
@@ -63,29 +60,64 @@ public class PokerHandChecker {
                 int finalJ = j;
                 if (hand.pokerHand.stream().anyMatch(card -> (card.getValue() == currBase + finalJ && card.getSuite().equals(currSuite)))) {
                     ArrayList<Card> nextCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> card.getValue() == currBase + finalJ).collect(Collectors.toList());
-                    System.out.println(nextCards);
                     count++;
                 }
             }
             if (count==5) {
                 if (currBase>baseValue) {
-                    System.out.println(currBase);
-                    hasStraight=true;
+                    hasStraightFlush=true;
+                    outputSuite=currSuite;
                     baseValue=currBase;
                 }
             }
         }
-        if (hasStraight) {
-            System.out.println("Straight flush starting at: " + baseValue);
+
+        hasRoyalFlush=hasStraightFlush && baseValue==10;
+//        if (hasRoyalFlush) {
+//            System.out.println("Royal flush starting at " + baseValue + " in the suite of " + outputSuite);
+//        }
+
+        return hasStraightFlush && baseValue==10;
+    }
+
+    public static boolean StraightFlushCheck(PokerHand hand) {
+        int baseValue = 0;
+        boolean hasStraightFlush = false;
+
+        for (int i=0; i<hand.pokerHand.size(); i++) {
+            int cardValue = hand.pokerHand.get(i).getValue();
+            int currBase;
+            if (cardValue==14) {
+                currBase=1;
+            } else {
+                currBase = cardValue;
+            }
+            String currSuite = hand.pokerHand.get(i).getSuite();
+            int count=1;
+            for (int j=1; j<5; j++) {
+                int finalJ = j;
+                if (hand.pokerHand.stream().anyMatch(card -> (card.getValue() == currBase + finalJ && card.getSuite().equals(currSuite)))) {
+                    ArrayList<Card> nextCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> card.getValue() == currBase + finalJ).collect(Collectors.toList());
+                    count++;
+                }
+            }
+            if (count==5) {
+                if (currBase>baseValue) {
+                    hasStraightFlush=true;
+                    baseValue=currBase;
+                }
+            }
         }
-        return hasStraight;
+//        if (hasStraightFlush) {
+//            System.out.println("Straight flush starting at: " + baseValue);
+//        }
+        return hasStraightFlush;
     }
 
     public static boolean FourOfAKindCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         for (Integer key : valueMap.keySet()) {
             if (valueMap.get(key).size() >= 4) {
-                System.out.println(valueMap.get(key).get(0).getValue());
                 return true;
             }
         }
@@ -104,7 +136,6 @@ public class PokerHandChecker {
                 hasThreeOfAKind = true;
                 if (valueMap.get(key).get(0).getValue() > topValue1) {
                     topValue1 = valueMap.get(key).get(0).getValue();
-                    System.out.println("curr value is " + topValue1);
                 }
 
             }
@@ -114,18 +145,16 @@ public class PokerHandChecker {
                 hasPair = true;
                 if (valueMap.get(key).get(0).getValue() > topValue2) {
                     topValue2 = valueMap.get(key).get(0).getValue();
-                    System.out.println(topValue2);
                 }
 
             }
         }
-        System.out.println("3 of " + topValue1 + " and 2 of " + topValue2);
+//        System.out.println("3 of " + topValue1 + " and 2 of " + topValue2);
         return hasThreeOfAKind && hasPair;
     }
 
     public static boolean FlushCheck(PokerHand hand) {
         HashMap<String, ArrayList<Card>> suiteMap = splitBySuite(hand);
-        System.out.println(suiteMap);
         for (String key : suiteMap.keySet()) {
             if (suiteMap.get(key).size() >= 5) {
                 return true;
@@ -155,15 +184,14 @@ public class PokerHandChecker {
             }
             if (count==5) {
                 if (currBase>baseValue) {
-                    System.out.println(currBase);
                     hasStraight=true;
                     baseValue=currBase;
                 }
             }
         }
-        if (hasStraight) {
-            System.out.println("Straight starting at: " + baseValue);
-        }
+//        if (hasStraight) {
+//            System.out.println("Straight starting at: " + baseValue);
+//        }
         return hasStraight;
     }
 
@@ -176,7 +204,6 @@ public class PokerHandChecker {
                 hasThreeOfAKind = true;
                 if (valueMap.get(key).get(0).getValue() > topValue) {
                     topValue = valueMap.get(key).get(0).getValue();
-                    System.out.println(topValue);
                 }
 
             }
@@ -199,13 +226,12 @@ public class PokerHandChecker {
                 if (valueMap.get(key).get(0).getValue() > topValue1) {
                     topValue2=topValue1;
                     topValue1 = valueMap.get(key).get(0).getValue();
-                    System.out.println("Values are: " + topValue1 + " and " + topValue2);
                 } else if (valueMap.get(key).get(0).getValue() > topValue2) {
                     topValue2 = valueMap.get(key).get(0).getValue();
-                    System.out.println("Values are: " + topValue1 + " and " + topValue2);
                 }
             }
         }
+//        System.out.println("Values are: " + topValue1 + " and " + topValue2);
         return hasTwoPair;
     }
 
@@ -218,7 +244,6 @@ public class PokerHandChecker {
                 hasPair = true;
                 if (valueMap.get(key).get(0).getValue() > topValue) {
                     topValue = valueMap.get(key).get(0).getValue();
-                    System.out.println(topValue);
                 }
 
             }
