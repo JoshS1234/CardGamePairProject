@@ -1,7 +1,7 @@
 package org.example.utils;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 public class UserMessages {
@@ -23,25 +23,23 @@ public class UserMessages {
     }
 
 
-    public static int getUserIntegerResponse(String promptForUser) {
+    public static Integer getUserIntegerResponse(String promptForUser) {
         Scanner myScanner = new Scanner(System.in);
-        boolean hasAnswered = false;
-        int userResponse=0;
 
+        System.out.println(promptForUser);
+        String userResponse = myScanner.nextLine();
+        Pattern pattern = Pattern.compile("^[0-9]+$");
 
-        while (!hasAnswered) {
-            try {
-                System.out.println(promptForUser);
-                userResponse = myScanner.nextInt();
-                hasAnswered = true;
-            } catch (Exception e) {
-                System.out.println("Must be an integer response");
-                System.out.println(promptForUser);
-                userResponse = myScanner.nextInt();
-            }
+        while (!pattern.matcher(userResponse.toLowerCase()).matches()) {
+            System.out.println("Must be an integer response");
+            System.out.println(promptForUser);
+            userResponse = myScanner.nextLine();
         }
-        return userResponse;
+
+        return Integer.parseInt(userResponse);
     }
+
+
 
 
 }

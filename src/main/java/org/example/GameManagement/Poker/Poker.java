@@ -17,7 +17,7 @@ public class Poker extends Game {
     @Override
     public void play() {
         System.out.println("play game");
-        System.out.println(UserMessages.getUserIntegerResponse("hello"));
+        PokerUserMessages.gameSetup();
     }
 
     @Override
