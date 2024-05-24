@@ -3,6 +3,7 @@ package org.example;
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
 import org.example.GameManagement.Poker.HandComparer;
+import org.example.GameManagement.Poker.Poker;
 import org.example.GameManagement.Poker.PokerHand;
 import org.example.GameManagement.Poker.PokerHandChecker;
 import org.example.GameManagement.Snap.Snap;
@@ -35,29 +36,30 @@ public class Main {
 //        System.out.println("No comparison: " + CompareCards.compareCards(cardFive, cardSix));
 
 
-        PokerHand testPokerHand1 = new PokerHand();
-        testPokerHand1.add(new Card("2", "spade"));
-        testPokerHand1.add(new Card("4", "heart"));
-        testPokerHand1.add(new Card("5", "diamond"));
-        testPokerHand1.add(new Card("3", "club"));
-        testPokerHand1.add(new Card("10", "club"));
-        testPokerHand1.add(new Card("8", "club"));
-        testPokerHand1.add(new Card("9", "club"));
+//        PokerHand testPokerHand1 = new PokerHand();
+//        testPokerHand1.add(new Card("2", "spade"));
+//        testPokerHand1.add(new Card("4", "heart"));
+//        testPokerHand1.add(new Card("5", "diamond"));
+//        testPokerHand1.add(new Card("3", "club"));
+//        testPokerHand1.add(new Card("10", "club"));
+//        testPokerHand1.add(new Card("8", "club"));
+//        testPokerHand1.add(new Card("9", "club"));
+//
+//        PokerHand testPokerHand2 = new PokerHand();
+//        testPokerHand2.add(new Card("3", "club"));
+//        testPokerHand2.add(new Card("8", "heart"));
+//        testPokerHand2.add(new Card("9", "club"));
+//        testPokerHand2.add(new Card("2", "diamond"));
+//        testPokerHand2.add(new Card("J", "heart"));
+//        testPokerHand2.add(new Card("6", "heart"));
+//        testPokerHand2.add(new Card("K", "heart"));
+//
+//        HandComparer handComparer = new HandComparer(testPokerHand1, testPokerHand2);
+//        System.out.println(handComparer.compareTwoHands());
 
-        PokerHand testPokerHand2 = new PokerHand();
-        testPokerHand2.add(new Card("3", "club"));
-        testPokerHand2.add(new Card("8", "heart"));
-        testPokerHand2.add(new Card("9", "club"));
-        testPokerHand2.add(new Card("2", "diamond"));
-        testPokerHand2.add(new Card("J", "heart"));
-        testPokerHand2.add(new Card("6", "heart"));
-        testPokerHand2.add(new Card("K", "heart"));
 
-        HandComparer handComparer = new HandComparer(testPokerHand1, testPokerHand2);
-        System.out.println(handComparer.compareTwoHands());
-
-
-
+        Poker poker = new Poker("Poker", "Try not to lose all your chips");
+        poker.play();
 
 
 //        //Needs to be moved to some kind of command runner
