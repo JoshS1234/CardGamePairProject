@@ -37,64 +37,25 @@ public class PokerPlayer {
         this.position = position;
     }
 
-    public HashMap<String, Object> playerTurn(int currentBet) {
-        HashMap<String, Object> returnHashMap = new HashMap<>();
-        System.out.println("Current bet is: " + currentBet);
-        int userChoice=0;
-        lookAtCards();
-        System.out.println("There are no cards on the table yet");
-
-
-        if (currentBet<this.chips) {
-
-            while (!(userChoice==1 || userChoice==2 || userChoice==3)) {
-                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call\n3. Raise");
-            }
-
-
-        } else if (currentBet==this.chips) {
-            while (!(userChoice==1 || userChoice==2)) {
-                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call");
-            }
-        }
-
-        switch (userChoice) {
-            case 1:
-                System.out.println("Fold");
-                returnHashMap.put("choice", "fold");
-                break;
-            case 2:
-                System.out.println("Call");
-                returnHashMap.put("choice", "call");
-                break;
-            case 3:
-                System.out.println("Raise");
-                returnHashMap.put("choice", "raise");
-                break;
-            default:
-                System.out.println("Something broke");
-                returnHashMap.put("choice", "something broke");
-        }
-
-        return returnHashMap;
-
-
-    }
-
     public HashMap<String, Object> playerTurn(int currentBet, ArrayList<Card> cardsOnTable) {
         HashMap<String, Object> returnHashMap = new HashMap<>();
-        System.out.println("Current bet is: " + currentBet);
         int userChoice=0;
         lookAtCards();
-        System.out.println("Cards on the table are: ");
-        for (Card card : cardsOnTable) {
-            System.out.println(card);
+        if (cardsOnTable.isEmpty()) {
+            System.out.println("There are no cards on the table yet");
+        } else {
+            System.out.println("Cards on the table are: ");
+            for (Card card : cardsOnTable) {
+                System.out.println(card);
+            }
         }
+        System.out.println("You have: " + this.chips + " chips");
+        System.out.println("Current bet is: " + currentBet);
+
 
         if (currentBet<this.chips) {
-
             while (!(userChoice==1 || userChoice==2 || userChoice==3)) {
-                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call\n3.Raise");
+                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call\n3. Raise");
             }
 
 
@@ -194,5 +155,6 @@ public class PokerPlayer {
         System.out.println("Cards in your hand are: ");
         this.pokerhand.printHand();
     }
+
 
 }

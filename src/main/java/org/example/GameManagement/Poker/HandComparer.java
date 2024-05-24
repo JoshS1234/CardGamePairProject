@@ -303,7 +303,6 @@ public class HandComparer {
         if (hasPair1 && hasPair2) {
             int pair1value = (int) PokerHandChecker.PairCheck(pokerHand1).get("pairValue");
             int pair2value = (int) PokerHandChecker.PairCheck(pokerHand2).get("pairValue");
-//            System.out.println("pairs: " + pair1value + " vs " + pair2value);
             if (pair1value > pair2value) {
                 returnHashMap.put("result", 1);
                 returnHashMap.put("reason", "higher pair value");
@@ -358,9 +357,8 @@ public class HandComparer {
             }
         }
 
-        System.out.println("Shouldn't really get here");
         returnHashMap.put("result", 0);
-        returnHashMap.put("reason", "draw???");
+        returnHashMap.put("reason", "all same high cards");
         return returnHashMap;
 
 
