@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
+import org.example.GameManagement.Game;
+import org.example.GameManagement.GameSelector;
 import org.example.GameManagement.Poker.HandComparer;
 import org.example.GameManagement.Poker.Poker;
 import org.example.GameManagement.Poker.PokerHand;
@@ -61,6 +63,11 @@ public class Main {
         Poker poker = new Poker("Poker", "Try not to lose all your chips");
         poker.play();
 
+        GameSelector gameSelector = new GameSelector();
+        if (gameSelector.startGameSelector()) {
+            Game game = gameSelector.chooseGame();
+            game.play();
+        }
 
 //        //Needs to be moved to some kind of command runner
 //        Snap snap = new Snap("Snap", "Be quickest to match cards");
