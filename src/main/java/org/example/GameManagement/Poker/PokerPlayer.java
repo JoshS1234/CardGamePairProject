@@ -4,6 +4,7 @@ import org.example.CardSetup.Card;
 import org.example.utils.UserMessages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class PokerPlayer {
@@ -36,39 +37,130 @@ public class PokerPlayer {
         this.position = position;
     }
 
-    public boolean isFolding() {
-        boolean isFolding;
-        String fold="";
-        while (!Objects.equals(fold, "y") && !Objects.equals(fold, "n")) {
-            lookAtCards();
-            fold = UserMessages.getUserTextResponse("Would you like to fold? (y/n)");
+    public HashMap<String, Object> playerTurn(int currentBet) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        System.out.println("Current bet is: " + currentBet);
+        int userChoice=0;
+        lookAtCards();
+        System.out.println("There are no cards on the table yet");
+
+
+        if (currentBet<this.chips) {
+
+            while (!(userChoice==1 || userChoice==2 || userChoice==3)) {
+                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call\n3. Raise");
+            }
+
+
+        } else if (currentBet==this.chips) {
+            while (!(userChoice==1 || userChoice==2)) {
+                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call");
+            }
         }
-        if (fold.equals("y")) {
-            isFolding = true;
-        } else {
-            isFolding = false;
+
+        switch (userChoice) {
+            case 1:
+                System.out.println("Fold");
+                returnHashMap.put("choice", "fold");
+                break;
+            case 2:
+                System.out.println("Call");
+                returnHashMap.put("choice", "call");
+                break;
+            case 3:
+                System.out.println("Raise");
+                returnHashMap.put("choice", "raise");
+                break;
+            default:
+                System.out.println("Something broke");
+                returnHashMap.put("choice", "something broke");
         }
-        return isFolding;
+
+        return returnHashMap;
+
+
     }
 
-    public boolean isFolding(ArrayList<Card> cardsOnTable) {
-        boolean isFolding;
-        String fold="";
-        while (!Objects.equals(fold, "y") && !Objects.equals(fold, "n")) {
-            lookAtCards();
-            System.out.println("Cards on the table are: ");
-            for (Card card : cardsOnTable) {
-                System.out.println(card);
+    public HashMap<String, Object> playerTurn(int currentBet, ArrayList<Card> cardsOnTable) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        System.out.println("Current bet is: " + currentBet);
+        int userChoice=0;
+        lookAtCards();
+        System.out.println("Cards on the table are: ");
+        for (Card card : cardsOnTable) {
+            System.out.println(card);
+        }
+
+        if (currentBet<this.chips) {
+
+            while (!(userChoice==1 || userChoice==2 || userChoice==3)) {
+                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call\n3.Raise");
             }
-            fold = UserMessages.getUserTextResponse("Would you like to fold? (y/n)");
+
+
+        } else if (currentBet==this.chips) {
+            while (!(userChoice==1 || userChoice==2)) {
+                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call");
+            }
         }
-        if (fold.equals("y")) {
-            isFolding = true;
-        } else {
-            isFolding = false;
+
+        switch (userChoice) {
+            case 1:
+                System.out.println("Fold");
+                returnHashMap.put("choice", "fold");
+            break;
+            case 2:
+                System.out.println("Call");
+                returnHashMap.put("choice", "call");
+            break;
+            case 3:
+                System.out.println("Raise");
+                returnHashMap.put("choice", "raise");
+                break;
+            default:
+                System.out.println("Something broke");
+                returnHashMap.put("choice", "something broke");
         }
-        return isFolding;
+
+        return returnHashMap;
+
+
     }
+
+
+//    public boolean isFolding() {
+//        boolean isFolding;
+//        String fold="";
+//        while (!Objects.equals(fold, "y") && !Objects.equals(fold, "n")) {
+//            lookAtCards();
+//            fold = UserMessages.getUserTextResponse("Would you like to fold? (y/n)");
+//        }
+//        if (fold.equals("y")) {
+//            isFolding = true;
+//        } else {
+//            isFolding = false;
+//        }
+//        return isFolding;
+//    }
+//
+//    public boolean isFolding(ArrayList<Card> cardsOnTable) {
+//        boolean isFolding;
+//        String fold="";
+//        while (!Objects.equals(fold, "y") && !Objects.equals(fold, "n")) {
+//            lookAtCards();
+//            System.out.println("Cards on the table are: ");
+//            for (Card card : cardsOnTable) {
+//                System.out.println(card);
+//            }
+//            fold = UserMessages.getUserTextResponse("Would you like to fold? (y/n)");
+//        }
+//        if (fold.equals("y")) {
+//            isFolding = true;
+//        } else {
+//            isFolding = false;
+//        }
+//        return isFolding;
+//    }
 
 
 

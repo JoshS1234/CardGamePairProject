@@ -6,6 +6,7 @@ import org.example.GameManagement.Game;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Poker extends Game {
 
@@ -65,17 +66,36 @@ public class Poker extends Game {
                 break;
             }
 
-            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding();
-            if (thisPlayerIsFolding) {
+            HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet);
+            if (playerChoice.get("choice")=="fold") {
                 playersInTheRound.remove(positionOnTable);
                 System.out.println(playersInTheRound);
-            } else {
+            } else if (playerChoice.get("choice")=="call") {
                 count++;
                 if (count==playersInTheRound.size()) {
                     allBet=true;
                 }
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else if (playerChoice.get("choice")=="raise") {
+                count++;
+                if (count==playersInTheRound.size()) {
+                    allBet=true;
+                }
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else {
+                System.out.println("Argh");
             }
+//            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding();
+//            if (thisPlayerIsFolding) {
+//                playersInTheRound.remove(positionOnTable);
+//                System.out.println(playersInTheRound);
+//            } else {
+//                count++;
+//                if (count==playersInTheRound.size()) {
+//                    allBet=true;
+//                }
+//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+//            }
         }
     }
 
@@ -105,17 +125,36 @@ public class Poker extends Game {
                 break;
             }
 
-            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
-            if (thisPlayerIsFolding) {
+            HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards);
+            if (playerChoice.get("choice")=="fold") {
                 playersInTheRound.remove(positionOnTable);
                 System.out.println(playersInTheRound);
-            } else {
+            } else if (playerChoice.get("choice")=="call") {
                 count++;
                 if (count==playersInTheRound.size()) {
                     allBet=true;
                 }
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else if (playerChoice.get("choice")=="raise") {
+                count++;
+                if (count==playersInTheRound.size()) {
+                    allBet=true;
+                }
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else {
+                System.out.println("Argh");
             }
+//            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
+//            if (thisPlayerIsFolding) {
+//                playersInTheRound.remove(positionOnTable);
+//                System.out.println(playersInTheRound);
+//            } else {
+//                count++;
+//                if (count==playersInTheRound.size()) {
+//                    allBet=true;
+//                }
+//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+//            }
         }
     }
 
@@ -140,18 +179,36 @@ public class Poker extends Game {
                 System.out.println("end of round, only one player left");
                 break;
             }
-
-            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
-            if (thisPlayerIsFolding) {
+            HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards);
+            if (playerChoice.get("choice")=="fold") {
                 playersInTheRound.remove(positionOnTable);
                 System.out.println(playersInTheRound);
-            } else {
+            } else if (playerChoice.get("choice")=="call") {
                 count++;
                 if (count==playersInTheRound.size()) {
                     allBet=true;
                 }
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else if (playerChoice.get("choice")=="raise") {
+                count++;
+                if (count==playersInTheRound.size()) {
+                    allBet=true;
+                }
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else {
+                System.out.println("Argh");
             }
+//            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
+//            if (thisPlayerIsFolding) {
+//                playersInTheRound.remove(positionOnTable);
+//                System.out.println(playersInTheRound);
+//            } else {
+//                count++;
+//                if (count==playersInTheRound.size()) {
+//                    allBet=true;
+//                }
+//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+//            }
         }
     }
 
@@ -175,18 +232,36 @@ public class Poker extends Game {
                 System.out.println("end of round, only one player left");
                 break;
             }
-
-            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
-            if (thisPlayerIsFolding) {
+            HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards);
+            if (playerChoice.get("choice")=="fold") {
                 playersInTheRound.remove(positionOnTable);
                 System.out.println(playersInTheRound);
-            } else {
+            } else if (playerChoice.get("choice")=="call") {
                 count++;
                 if (count==playersInTheRound.size()) {
                     allBet=true;
                 }
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else if (playerChoice.get("choice")=="raise") {
+                count++;
+                if (count==playersInTheRound.size()) {
+                    allBet=true;
+                }
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+            } else {
+                System.out.println("Argh");
             }
+//            boolean thisPlayerIsFolding = playersInTheRound.get(positionOnTable).isFolding(centralCards);
+//            if (thisPlayerIsFolding) {
+//                playersInTheRound.remove(positionOnTable);
+//                System.out.println(playersInTheRound);
+//            } else {
+//                count++;
+//                if (count==playersInTheRound.size()) {
+//                    allBet=true;
+//                }
+//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+//            }
         }
     }
 
