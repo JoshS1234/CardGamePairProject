@@ -18,6 +18,7 @@ public class Snap extends Game {
     private Card computerCard;
     private Scanner scanner = new Scanner(System.in);
     private boolean hasPlayed = false;
+    private boolean hasLost;
 
     //Constructor
     public Snap(String title, String rules) {
@@ -35,15 +36,15 @@ public class Snap extends Game {
     }
 
     @Override
-    public boolean playAgain() {
-        String userInput;
-
+    public boolean playAgain(){
         if (!hasPlayed) {
             System.out.println("Playing game.");
             hasPlayed = true;
             return true;
         } else {
+            if(!hasLost) scanner.nextLine();
             System.out.println("Want to play again?");
+            String userInput = "";
             userInput = scanner.nextLine();
             while (!userInput.equalsIgnoreCase("y") && !userInput.equalsIgnoreCase("n"))
             {
@@ -78,8 +79,10 @@ public class Snap extends Game {
             try {
                 if (UserInteraction.userCall(2)) {
                     System.out.println("You win.");
+                    hasLost = false;
                 } else {
                     System.out.println("You lose.");
+                    hasLost = true;
                 }
             } catch (Exception e) {
                 System.out.println("Error");
