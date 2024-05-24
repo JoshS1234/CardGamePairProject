@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
+import org.example.GameManagement.Game;
+import org.example.GameManagement.GameSelector;
 import org.example.GameManagement.Poker.HandComparer;
 import org.example.GameManagement.Poker.PokerHand;
 import org.example.GameManagement.Poker.PokerHandChecker;
@@ -56,7 +58,11 @@ public class Main {
         HandComparer handComparer = new HandComparer(testPokerHand1, testPokerHand2);
         System.out.println(handComparer.compareTwoHands());
 
-
+        GameSelector gameSelector = new GameSelector();
+        if (gameSelector.startGameSelector()) {
+            Game game = gameSelector.chooseGame();
+            game.play();
+        }
 
 
 
