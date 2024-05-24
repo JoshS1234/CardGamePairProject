@@ -9,6 +9,7 @@ public class Poker extends Game {
 
     int chips;
     ArrayList<PokerPlayer> players = new ArrayList<>();
+    int positionOnTable;
 
     public Poker(String title, String rules) {
         super(title, rules);
