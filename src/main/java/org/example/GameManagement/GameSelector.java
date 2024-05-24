@@ -1,5 +1,6 @@
 package org.example.GameManagement;
 
+import org.example.GameManagement.Poker.Poker;
 import org.example.GameManagement.Snap.Snap;
 import org.example.utils.UserMessages;
 
@@ -48,7 +49,7 @@ public class GameSelector implements ChooseGame {
                 chosenGame = new Snap("Snap", "Be quickest to match cards");
                 break;
             case "poker":
-                chosenGame = new Snap("Poker", "Keep your chips!");
+                chosenGame = new Poker("Poker", "Keep your chips!");
                 break;
         }
 

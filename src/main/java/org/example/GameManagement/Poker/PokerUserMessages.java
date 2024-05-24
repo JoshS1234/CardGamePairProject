@@ -1,8 +1,8 @@
 package org.example.GameManagement.Poker;
 
+import org.example.CardSetup.Card;
 import org.example.utils.UserMessages;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PokerUserMessages extends UserMessages {
@@ -38,5 +38,38 @@ public class PokerUserMessages extends UserMessages {
         }
         return pokerPlayers;
     }
+
+
+    public static void firstRoundAnnouncement() {
+        System.out.println("--------------------------------------------------");
+        System.out.println("           First Round of betting                 ");
+        System.out.println("--------------------------------------------------");
+    }
+
+    public static void bettingRoundAnnouncement(ArrayList<Card> cards) {
+        String thisRound="";
+        if (cards.size()==3) {
+            thisRound = "flop";
+        } else if (cards.size()==4) {
+            thisRound="river";
+        } else {
+            thisRound="turn";
+        }
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("              Time for the " + thisRound + "!                  ");
+        System.out.println("--------------------------------------------------");
+        System.out.println("--------------------------------------------------");
+        System.out.println("                    Cards are                     ");
+        for (Card card : cards) {
+            System.out.println(card);
+        }
+        System.out.println("--------------------------------------------------");
+    }
+
+
+
+
+
 
 }
