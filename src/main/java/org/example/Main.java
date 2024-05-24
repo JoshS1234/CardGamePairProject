@@ -36,22 +36,22 @@ public class Main {
 
 
         PokerHand testPokerHand1 = new PokerHand();
-        testPokerHand1.add(new Card("8", "spade"));
-        testPokerHand1.add(new Card("8", "heart"));
-        testPokerHand1.add(new Card("J", "club"));
-        testPokerHand1.add(new Card("J", "heart"));
-        testPokerHand1.add(new Card("Q", "club"));
-        testPokerHand1.add(new Card("K", "club"));
-        testPokerHand1.add(new Card("A", "club"));
+        testPokerHand1.add(new Card("2", "spade"));
+        testPokerHand1.add(new Card("4", "heart"));
+        testPokerHand1.add(new Card("5", "diamond"));
+        testPokerHand1.add(new Card("3", "club"));
+        testPokerHand1.add(new Card("10", "club"));
+        testPokerHand1.add(new Card("8", "club"));
+        testPokerHand1.add(new Card("9", "club"));
 
         PokerHand testPokerHand2 = new PokerHand();
-        testPokerHand2.add(new Card("8", "club"));
+        testPokerHand2.add(new Card("3", "club"));
         testPokerHand2.add(new Card("8", "heart"));
-        testPokerHand2.add(new Card("J", "diamond"));
-        testPokerHand2.add(new Card("10", "club"));
+        testPokerHand2.add(new Card("9", "club"));
+        testPokerHand2.add(new Card("2", "diamond"));
         testPokerHand2.add(new Card("J", "heart"));
-        testPokerHand2.add(new Card("Q", "heart"));
-        testPokerHand2.add(new Card("9", "heart"));
+        testPokerHand2.add(new Card("6", "heart"));
+        testPokerHand2.add(new Card("K", "heart"));
 
         HandComparer handComparer = new HandComparer(testPokerHand1, testPokerHand2);
         System.out.println(handComparer.compareTwoHands());

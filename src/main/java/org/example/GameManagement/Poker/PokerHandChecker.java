@@ -2,11 +2,9 @@ package org.example.GameManagement.Poker;
 
 import org.example.CardSetup.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PokerHandChecker {
@@ -39,7 +37,7 @@ public class PokerHandChecker {
         return suiteMap;
     }
 
-    public static ArrayList<Object> RoyalFlushCheck(PokerHand hand) {
+    public static HashMap<String, Object> RoyalFlushCheck(PokerHand hand) {
         int baseValue = 0;
         boolean hasStraightFlush = false;
         boolean hasRoyalFlush;
@@ -71,14 +69,14 @@ public class PokerHandChecker {
         }
 
         hasRoyalFlush = hasStraightFlush && baseValue == 10;
-        ArrayList<Object> returnArr = new ArrayList<>();
-        returnArr.add(hasRoyalFlush);
-        return returnArr;
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        returnHashMap.put("hasRoyalFlush", hasRoyalFlush);
+        return returnHashMap;
 
     }
 
-    public static ArrayList<Object> StraightFlushCheck(PokerHand hand) {
-        int baseValue = 0;
+    public static HashMap<String, Object> StraightFlushCheck(PokerHand hand) {
+        int startValue = 0;
         boolean hasStraightFlush = false;
 
         for (int i = 0; i < hand.pokerHand.size(); i++) {
@@ -98,43 +96,43 @@ public class PokerHandChecker {
                 }
             }
             if (count == 5) {
-                if (currBase > baseValue) {
+                if (currBase > startValue) {
                     hasStraightFlush = true;
-                    baseValue = currBase;
+                    startValue = currBase;
                 }
             }
         }
-        ArrayList<Object> returnArr = new ArrayList<>();
-        returnArr.add(hasStraightFlush);
-        returnArr.add(baseValue);
-        return returnArr;
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        returnHashMap.put("hasStraightFlush",hasStraightFlush);
+        returnHashMap.put("startValue", startValue);
+        return returnHashMap;
     }
 
 
     //CHECK HIGH CARD BIT
-    public static ArrayList<Object> FourOfAKindCheck(PokerHand hand) {
+    public static HashMap<String, Object> FourOfAKindCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
-        ArrayList<Object> returnArr = new ArrayList<>();
+        HashMap<String, Object> returnHashMap = new HashMap<>();
         for (Integer key : valueMap.keySet()) {
             if (valueMap.get(key).size() >= 4) {
-                returnArr.add(true);
-                returnArr.add(key);
+                returnHashMap.put("hasFourOfAKind", true);
+                returnHashMap.put("fourOfAKindValue", key);
 
-                ArrayList<Card> filteredHand = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).collect(Collectors.toList());
-                filteredHand = (ArrayList<Card>) filteredHand.stream().sorted((a, b) -> b.getValue() - a.getValue()).collect(Collectors.toList());
-                returnArr.add(filteredHand.get(0));
+//                ArrayList<Card> filteredHand = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).collect(Collectors.toList());
+//                filteredHand = (ArrayList<Card>) filteredHand.stream().sorted((a, b) -> b.getValue() - a.getValue()).collect(Collectors.toList());
+//                returnArr.add(filteredHand.get(0));
 
-                return returnArr;
+                return returnHashMap;
             }
         }
-        returnArr.add(false);
-        returnArr.add(0);
+        returnHashMap.put("hasFourOfAKind", false);
+        returnHashMap.put("fourOfAKindValue", 0);
 
-        return returnArr;
+        return returnHashMap;
     }
 
     //DONE
-    public static ArrayList<Object> FullHouseCheck(PokerHand hand) {
+    public static HashMap<String, Object> FullHouseCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         int topValue1 = 0;
         int topValue2 = 0;
@@ -160,33 +158,33 @@ public class PokerHandChecker {
 
             }
         }
-        ArrayList<Object> returnArr = new ArrayList<>();
+        HashMap<String, Object> returnHashMap = new HashMap<>();
         hasFullHouse = hasThreeOfAKind && hasPair;
-        returnArr.add(hasFullHouse);
+        returnHashMap.put("hasFullHouse", hasFullHouse);
         if (hasFullHouse) {
-            returnArr.add(topValue1);
-            returnArr.add(topValue2);
+            returnHashMap.put("threeOf",topValue1);
+            returnHashMap.put("twoOf",topValue2);
         }
 
-        return returnArr;
+        return returnHashMap;
     }
 
-    public static ArrayList<Object> FlushCheck(PokerHand hand) {
+    public static HashMap<String, Object> FlushCheck(PokerHand hand) {
         HashMap<String, ArrayList<Card>> suiteMap = splitBySuite(hand);
-        ArrayList<Object> returnArr = new ArrayList<>();
+        HashMap<String, Object> returnHashMap = new HashMap<>();
         for (String key : suiteMap.keySet()) {
             if (suiteMap.get(key).size() >= 5) {
-                returnArr.add(true);
-                returnArr.add((ArrayList<Card>) suiteMap.get(key).stream().sorted((a, b) -> b.getValue() - a.getValue()).limit(5).collect(Collectors.toList()));
-                return returnArr;
+                returnHashMap.put("hasFlush",true);
+                returnHashMap.put("flushCards", (ArrayList<Card>) suiteMap.get(key).stream().sorted((a, b) -> b.getValue() - a.getValue()).limit(5).collect(Collectors.toList()));
+                return returnHashMap;
             }
         }
-        returnArr.add(false);
-        return returnArr;
+        returnHashMap.put("hasFlush", false);
+        return returnHashMap;
     }
 
-    public static ArrayList<Object> StraightCheck(PokerHand hand) {
-        int baseValue = 0;
+    public static HashMap<String, Object> StraightCheck(PokerHand hand) {
+        int startValue = 0;
         boolean hasStraight = false;
 
         for (int i = 0; i < hand.pokerHand.size(); i++) {
@@ -205,23 +203,23 @@ public class PokerHandChecker {
                 }
             }
             if (count == 5) {
-                if (currBase > baseValue) {
+                if (currBase > startValue) {
                     hasStraight = true;
-                    baseValue = currBase;
+                    startValue = currBase;
                 }
             }
         }
-        ArrayList<Object> returnArr = new ArrayList<>();
-        returnArr.add(hasStraight);
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        returnHashMap.put("hasStraight", hasStraight);
         if (hasStraight) {
-            returnArr.add(baseValue);
+            returnHashMap.put("startValue", startValue);
         }
-        return returnArr;
+        return returnHashMap;
     }
 
-    public static ArrayList<Object> ThreeOfAKindCheck(PokerHand hand) {
+    public static HashMap<String, Object> ThreeOfAKindCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
-        ArrayList<Object> returnArr = new ArrayList<>();
+        HashMap<String, Object> returnHashMap = new HashMap<>();
         int topValue = 0;
         boolean hasThreeOfAKind = false;
         for (Integer key : valueMap.keySet()) {
@@ -229,21 +227,21 @@ public class PokerHandChecker {
                 hasThreeOfAKind = true;
                 if (valueMap.get(key).get(0).getValue() > topValue) {
                     topValue = valueMap.get(key).get(0).getValue();
-                    returnArr.add(hasThreeOfAKind);
-                    returnArr.add(topValue);
-                    ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).sorted((a, b) -> b.getValue() - a.getValue()).limit(2).collect(Collectors.toList());
-                    returnArr.add(remainingCards);
+                    returnHashMap.put("hasThreeOfAKind", hasThreeOfAKind);
+                    returnHashMap.put("value", topValue);
+//                    ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).sorted((a, b) -> b.getValue() - a.getValue()).limit(2).collect(Collectors.toList());
+//                    returnHashMap.put("remainingCards", remainingCards);
                 }
 
             }
         }
-        if (returnArr.isEmpty()) {
-            returnArr.add(false);
+        if (returnHashMap.isEmpty()) {
+            returnHashMap.put("hasThreeOfAKind", false);
         }
-        return returnArr;
+        return returnHashMap;
     }
 
-    public static ArrayList<Object> TwoPairCheck(PokerHand hand) {
+    public static HashMap<String, Object> TwoPairCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         int topValue1 = 0;
         int topValue2 = 0;
@@ -263,22 +261,22 @@ public class PokerHandChecker {
                 }
             }
         }
-        ArrayList<Object> returnArray = new ArrayList<>();
-        returnArray.add(hasTwoPair);
+        HashMap<String, Object> returnHashmap = new HashMap<>();
+        returnHashmap.put("hasTwoPair", hasTwoPair);
         if (hasTwoPair) {
-            returnArray.add(topValue1);
-            returnArray.add(topValue2);
+            returnHashmap.put("topValue1", topValue1);
+            returnHashmap.put("topValue2", topValue2);
             int finalTopValue = topValue1;
             int finalTopValue1 = topValue2;
             ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream()
                     .filter(card -> (!Objects.equals(card.getValue(), finalTopValue) && !Objects.equals(card.getValue(), finalTopValue1)))
                     .sorted((a, b) -> b.getValue() - a.getValue()).limit(1).collect(Collectors.toList());
-            returnArray.add(remainingCards.get(0));
+            returnHashmap.put("highCard", remainingCards.get(0));
         }
-        return returnArray;
+        return returnHashmap;
     }
 
-    public static ArrayList<Object> PairCheck(PokerHand hand) {
+    public static HashMap<String, Object> PairCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         int topValue = 0;
         boolean hasPair = false;
@@ -291,24 +289,22 @@ public class PokerHandChecker {
 
             }
         }
-        ArrayList<Object> returnArr = new ArrayList<>();
-        returnArr.add(hasPair);
+        HashMap<String, Object> returnHashMap = new HashMap<>();
+        returnHashMap.put("hasPair", hasPair);
         if (hasPair) {
-            returnArr.add(topValue);
+            returnHashMap.put("pairValue", topValue);
             int finalTopValue = topValue;
             ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream()
                     .filter(card -> !Objects.equals(card.getValue(), finalTopValue))
                     .sorted((a, b) -> b.getValue() - a.getValue()).limit(3).collect(Collectors.toList());
-            returnArr.add(remainingCards);
+            returnHashMap.put("remainingCards", remainingCards);
         }
-        return returnArr;
+        return returnHashMap;
     }
 
     public static ArrayList<Card> HighCardCheck(PokerHand hand) {
         ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream()
                 .sorted((a, b) -> b.getValue() - a.getValue()).limit(5).collect(Collectors.toList());
-        System.out.println(remainingCards);
-
         return remainingCards;
 
     }
