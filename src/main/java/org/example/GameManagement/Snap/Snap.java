@@ -14,7 +14,7 @@ public class Snap extends Game {
 
     //Create instance of deck
     private Deck deck = new Deck();
-    private Card userCard;
+    private Card playerCard;
     private Card computerCard;
     private Scanner scanner = new Scanner(System.in);
     private boolean hasPlayed = false;
@@ -73,11 +73,11 @@ public class Snap extends Game {
             deck.shuffleDeck();
 
             //Deal initial two cards
-            dealPlayerCard();
-            dealComputerCard();
+            playerCard = DealCards.dealPlayerCard(deck);
+            computerCard = DealCards.dealComputerCard(deck);
 
             //Loop while no match is found
-            while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
+            while (!CompareCards.compareCards(playerCard, computerCard, SortMethods.suite))
             {
                 //Reset deck if it runs out of cards
                 if(deck.getDeckSize() == 0) {
@@ -87,15 +87,15 @@ public class Snap extends Game {
                 }
 
                 //Deal the player a card
-                dealPlayerCard();
+                playerCard = DealCards.dealPlayerCard(deck);
 
                 //Check if match found after player draw
-                if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
+                if(CompareCards.compareCards(playerCard, computerCard, SortMethods.suite)) {
                     break;
                 }
 
                 //Deal the computer a card
-                dealComputerCard();
+                computerCard = DealCards.dealComputerCard(deck);
 
             }
 
@@ -119,29 +119,5 @@ public class Snap extends Game {
         }
     }
 
-    //Deal card to player
-    public void dealPlayerCard () throws InterruptedException {
-        //Wait a second for better match flow
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Press enter to take a card");
 
-        //Wait for player to hit enter before drawing a card
-        scanner.nextLine();
-        userCard = deck.dealCard();
-
-        //Show card drawn
-        System.out.println("User card: " + userCard);
-    }
-
-    //Deal card to computer
-    public void dealComputerCard () throws InterruptedException {
-        //Wait a second for better match flow
-        TimeUnit.SECONDS.sleep(1);
-
-        //Deal the computer a card
-        computerCard = deck.dealCard();
-
-        //Show card drawn
-        System.out.println("Computer card: " + computerCard);
-    }
 }
