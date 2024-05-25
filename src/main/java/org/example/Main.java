@@ -67,14 +67,14 @@ public class Main {
 //        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("reason"));
 
 
-        Poker poker = new Poker("Poker", "Try not to lose all your chips");
-        poker.play();
+//        Poker poker = new Poker("Poker", "Try not to lose all your chips");
+//        poker.play();
 
-//        GameSelector gameSelector = new GameSelector();
-//        while (gameSelector.startGameSelector()) {
-//            Game game = gameSelector.chooseGame();
-//            game.play();
-//        }
+        GameSelector gameSelector = new GameSelector();
+        while (gameSelector.startGameSelector()) {
+            Game game = gameSelector.chooseGame();
+            game.play();
+        }
 
 //        //Needs to be moved to some kind of command runner
 //        Snap snap = new Snap("Snap", "Be quickest to match cards");

@@ -4,13 +4,14 @@ import org.example.CardSetup.Card;
 import org.example.utils.UserMessages;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PokerUserMessages extends UserMessages {
 
     public static Integer getNumberOfPlayers() {
         Integer numberOfPlayers=0;
-        while (numberOfPlayers<2 || numberOfPlayers>4) {
-            numberOfPlayers = UserMessages.getUserIntegerResponse("Howdy, welcome to Texas Hold'em! How many players will be playing? (must be between 2 and 4)");
+        while (numberOfPlayers<2 || numberOfPlayers>6) {
+            numberOfPlayers = UserMessages.getUserIntegerResponse("\n\nHowdy, welcome to Texas Hold'em! How many players will be playing? (must be between 2 and 6)");
         }
         return numberOfPlayers;
     }
@@ -69,7 +70,20 @@ public class PokerUserMessages extends UserMessages {
 
 
 
+    public static void finalWinnerAnnouncement(PokerPlayer player) {
+        System.out.println("--------------------------------------------------");
+        System.out.println("           Final winner was " + player.getName() + "!                  ");
+        System.out.println("--------------------------------------------------");
+        UserMessages.getUserPressEnterResponse("Press enter for next message");
+    }
 
+    public static boolean replay() {
+        String userResponse = "";
+        while (!Objects.equals(userResponse, "y") && !Objects.equals(userResponse, "n")) {
+            userResponse = UserMessages.getUserTextResponse("--------------------------------------------------\n     Would you like to play poker again? (y/n)      \n--------------------------------------------------").toLowerCase();
+        }
+        return userResponse.equals("y");
+    }
 
 
 }
