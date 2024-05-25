@@ -113,7 +113,7 @@ public class PokerPlayer {
         while (!isValidBet) {
             System.out.println("current bet is at " + currentBet);
             bet = UserMessages.getUserIntegerResponse("What would you like to raise the current bet to? (your current bet is " + this.playerCurrentBet+ ", you have " + this.chips + " chips, bet cannot be over " + poorestPlayerChips + ")");
-            if (bet >= currentBet && bet <= poorestPlayerChips && bet <= this.chips + this.playerCurrentBet) {
+            if (bet > currentBet && bet <= poorestPlayerChips && bet <= this.chips + this.playerCurrentBet) {
                 isValidBet = true;
             }
             if (bet > this.chips + this.playerCurrentBet) {

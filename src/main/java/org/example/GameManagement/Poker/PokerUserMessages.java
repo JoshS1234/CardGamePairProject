@@ -45,6 +45,8 @@ public class PokerUserMessages extends UserMessages {
         System.out.println("--------------------------------------------------");
         System.out.println("           First Round of betting                 ");
         System.out.println("--------------------------------------------------");
+        UserMessages.getUserPressEnterResponse("Press enter to begin betting");
+
     }
 
     public static void bettingRoundAnnouncement(ArrayList<Card> cards) {
@@ -60,12 +62,14 @@ public class PokerUserMessages extends UserMessages {
         System.out.println("--------------------------------------------------");
         System.out.println("              Time for the " + thisRound + "!                  ");
         System.out.println("--------------------------------------------------");
+        UserMessages.getUserPressEnterResponse("Press enter to see the cards");
         System.out.println("--------------------------------------------------");
         System.out.println("                    Cards are                     ");
         for (Card card : cards) {
             System.out.println(card);
         }
         System.out.println("--------------------------------------------------");
+        UserMessages.getUserPressEnterResponse("Press enter to begin betting");
     }
 
 
