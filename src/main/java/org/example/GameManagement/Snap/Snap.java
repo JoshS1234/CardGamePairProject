@@ -1,5 +1,7 @@
 package org.example.GameManagement.Snap;
 
+import org.example.ASCIIArt.DrawCards;
+import org.example.ASCIIArt.DrawDealer;
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
 import org.example.GameManagement.Game;
@@ -63,6 +65,8 @@ public class Snap extends Game {
     //Shuffle deck and deal cards
     public void handleGameLoop() throws InterruptedException{
 
+        DrawDealer.drawDealer();
+
         //Loop game while playAgain is true
         while(playAgain()) {
 
@@ -75,6 +79,7 @@ public class Snap extends Game {
 
             //Deal initial two cards
             Card playerCard = DealCards.dealPlayerCard(deck);
+            DrawCards.drawCard(playerCard.getSuite(), playerCard.getSymbol());
             Card computerCard = DealCards.dealComputerCard(deck);
 
             //Check that the gameMode will not be null
