@@ -6,6 +6,7 @@ import org.example.GameManagement.Game;
 import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
 import org.example.utils.UserInteraction;
+import org.example.utils.UserMessages;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +17,7 @@ public class Snap extends Game {
     private Deck deck = new Deck();
     private Card playerCard;
     private Card computerCard;
+    private SortMethods gameMode;
     private Scanner scanner = new Scanner(System.in);
     private boolean hasPlayed = false;
     private boolean hasLost;
@@ -31,7 +33,7 @@ public class Snap extends Game {
         try {
             handleGameLoop();
         } catch (InterruptedException e) {
-            System.out.println("Error");
+            System.out.println("Error with play again");
         }
     }
 
@@ -64,10 +66,30 @@ public class Snap extends Game {
     }
 
     //Shuffle deck and deal cards
-    public void handleGameLoop() throws InterruptedException {
+    public void handleGameLoop() throws InterruptedException{
 
         //Loop game while playAgain is true
         while(playAgain()) {
+
+            System.out.println("Available modes are: ");
+            System.out.println("Match by suite");
+            System.out.println("Match by symbol");
+            String userResponse = UserMessages.getUserTextResponse("Which mode would you like to play? Type Suite for option one and Symbol for option 2: ");
+
+            while (!userResponse.equalsIgnoreCase("Suite") && !userResponse.equalsIgnoreCase("Symbol")) {
+                System.out.println("Sorry I didn't catch that.");
+                userResponse = UserMessages.getUserTextResponse("Which mode would you like to play? Type Suite for option one and Symbol for option 2: ");
+            }
+
+            switch (userResponse) {
+                case "suite" :
+                    gameMode = SortMethods.suite;
+                    break;
+                case "symbol" :
+                    gameMode = SortMethods.symbol;
+                    break;
+            }
+
             //Setup deck
             deck.resetDeck();
             deck.shuffleDeck();
@@ -76,27 +98,12 @@ public class Snap extends Game {
             playerCard = DealCards.dealPlayerCard(deck);
             computerCard = DealCards.dealComputerCard(deck);
 
+            System.out.println("Card match: " + CompareCards.compareCards(playerCard, computerCard, gameMode));
+
             //Loop while no match is found
-            while (!CompareCards.compareCards(playerCard, computerCard, SortMethods.suite))
+            if (!CompareCards.compareCards(playerCard, computerCard, gameMode))
             {
-                //Reset deck if it runs out of cards
-                if(deck.getDeckSize() == 0) {
-                    System.out.println("Resetting deck");
-                    deck.resetDeck();
-                    deck.shuffleDeck();
-                }
-
-                //Deal the player a card
-                playerCard = DealCards.dealPlayerCard(deck);
-
-                //Check if match found after player draw
-                if(CompareCards.compareCards(playerCard, computerCard, SortMethods.suite)) {
-                    break;
-                }
-
-                //Deal the computer a card
-                computerCard = DealCards.dealComputerCard(deck);
-
+                SnapModes.playMode(playerCard, computerCard, deck, gameMode);
             }
 
             //Inform player of match
@@ -114,7 +121,7 @@ public class Snap extends Game {
                     hasLost = true;
                 }
             } catch (Exception e) {
-                System.out.println("Error");
+                System.out.println("Error here");
             }
         }
     }

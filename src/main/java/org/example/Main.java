@@ -59,15 +59,13 @@ public class Main {
         System.out.println(handComparer.compareTwoHands());
 
         GameSelector gameSelector = new GameSelector();
-        if (gameSelector.startGameSelector()) {
+        while (gameSelector.startGameSelector()) {
             Game game = gameSelector.chooseGame();
             game.play();
         }
 
-
-
         //Needs to be moved to some kind of command runner
-        Snap snap = new Snap("Snap", "Be quickest to match cards");
-        snap.play();
+//        Snap snap = new Snap("Snap", "Be quickest to match cards");
+//        snap.play();
     }
 }
