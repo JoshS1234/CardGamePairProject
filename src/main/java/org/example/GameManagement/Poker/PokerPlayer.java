@@ -14,6 +14,7 @@ public class PokerPlayer {
     public PokerHand pokerhand = new PokerHand();
     public PokerHand totalHandWithCentralCards = new PokerHand();
     public int playerCurrentBet = 0;
+    public boolean hasBetThisRound=false;
 
     public String getName() {
         return name;
