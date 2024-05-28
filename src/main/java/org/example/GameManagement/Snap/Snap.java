@@ -1,5 +1,7 @@
 package org.example.GameManagement.Snap;
 
+import org.example.ASCIIArt.DrawCards;
+import org.example.ASCIIArt.DrawDealer;
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
 import org.example.GameManagement.Game;
@@ -8,15 +10,12 @@ import org.example.utils.SortMethods;
 import org.example.utils.UserInteraction;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Snap extends Game {
 
     //Create instance of deck
-    private Deck deck = new Deck();
-    private Card userCard;
-    private Card computerCard;
-    private Scanner scanner = new Scanner(System.in);
+    private final Deck deck = new Deck();
+    private final Scanner scanner = new Scanner(System.in);
     private boolean hasPlayed = false;
     private boolean hasLost;
 
@@ -31,7 +30,7 @@ public class Snap extends Game {
         try {
             handleGameLoop();
         } catch (InterruptedException e) {
-            System.out.println("Error");
+            System.out.println("Error with play again");
         }
     }
 
@@ -48,7 +47,7 @@ public class Snap extends Game {
                 //Capture winning enter input
                 scanner.nextLine();
             }
-            System.out.println("Want to play again? Enter y for yes or n for no: ");
+            System.out.println("Want to play again? (y/n)");
             String userInput = scanner.nextLine();
 
             //Loop while input isn't y or n
@@ -64,39 +63,32 @@ public class Snap extends Game {
     }
 
     //Shuffle deck and deal cards
-    public void handleGameLoop() throws InterruptedException {
+    public void handleGameLoop() throws InterruptedException{
+
+        DrawDealer.drawDealer();
 
         //Loop game while playAgain is true
         while(playAgain()) {
+
+            //Select game mode to play
+            SortMethods gameMode = SnapModeSelector.snapModeSelector();
+
             //Setup deck
             deck.resetDeck();
             deck.shuffleDeck();
 
             //Deal initial two cards
-            dealPlayerCard();
-            dealComputerCard();
+            Card playerCard = DealCards.dealPlayerCard(deck);
+            DrawCards.drawCard(playerCard);
+            Card computerCard = DealCards.dealComputerCard(deck);
 
-            //Loop while no match is found
-            while (!CompareCards.compareCards(userCard, computerCard, SortMethods.suite))
+            //Check that the gameMode will not be null
+            assert gameMode != null;
+
+            //Run loop method if cards don't match
+            if (!CompareCards.compareCards(playerCard, computerCard, gameMode))
             {
-                //Reset deck if it runs out of cards
-                if(deck.getDeckSize() == 0) {
-                    System.out.println("Resetting deck");
-                    deck.resetDeck();
-                    deck.shuffleDeck();
-                }
-
-                //Deal the player a card
-                dealPlayerCard();
-
-                //Check if match found after player draw
-                if(CompareCards.compareCards(userCard, computerCard, SortMethods.suite)) {
-                    break;
-                }
-
-                //Deal the computer a card
-                dealComputerCard();
-
+                SnapModes.playMode(playerCard, computerCard, deck, gameMode);
             }
 
             //Inform player of match
@@ -106,7 +98,7 @@ public class Snap extends Game {
             try {
                 if (UserInteraction.userCall(2)) {
                     //Player wins if input is entered
-                    System.out.println("You win.");
+                    System.out.println("You win!!!!!!!!");
                     hasLost = false;
                 } else {
                     //Player loses if input is entered
@@ -114,34 +106,8 @@ public class Snap extends Game {
                     hasLost = true;
                 }
             } catch (Exception e) {
-                System.out.println("Error");
+                System.out.println("Error with userCall.");
             }
         }
-    }
-
-    //Deal card to player
-    public void dealPlayerCard () throws InterruptedException {
-        //Wait a second for better match flow
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Press enter to take a card");
-
-        //Wait for player to hit enter before drawing a card
-        scanner.nextLine();
-        userCard = deck.dealCard();
-
-        //Show card drawn
-        System.out.println("User card: " + userCard);
-    }
-
-    //Deal card to computer
-    public void dealComputerCard () throws InterruptedException {
-        //Wait a second for better match flow
-        TimeUnit.SECONDS.sleep(1);
-
-        //Deal the computer a card
-        computerCard = deck.dealCard();
-
-        //Show card drawn
-        System.out.println("Computer card: " + computerCard);
     }
 }
