@@ -1,7 +1,6 @@
 package org.example.ASCIIArt;
 
 import org.example.CardSetup.Card;
-import org.example.utils.StringFormatting;
 
 public class DrawCards {
 
@@ -13,13 +12,33 @@ public class DrawCards {
     public static void drawCard(Card card) {
 
         System.out.println(black + whiteBG + " ----------- " + colourReset);
-        System.out.println(black + whiteBG + StringFormatting.formatSymbolASCII(card.getSymbol()) + colourReset);
+        System.out.println(black + whiteBG + formatSymbolASCII(card.getSymbol(), 1) + colourReset);
         System.out.println(black + whiteBG + "| " + card.getSuite() + "         |" + colourReset);
         System.out.println(black + whiteBG + "|           |" + colourReset);
         System.out.println(black + whiteBG + "|     " + card.getSuite() + "     |" + colourReset);
         System.out.println(black + whiteBG + "|           |" + colourReset);
         System.out.println(black + whiteBG + "|         " + card.getSuite() + " |" + colourReset);
-        System.out.println(black + whiteBG + StringFormatting.formatSymbolASCII(card.getSymbol()) + colourReset);
+        System.out.println(black + whiteBG + formatSymbolASCII(card.getSymbol(), 2) + colourReset);
         System.out.println(black + whiteBG + " ----------- " + colourReset);
     }
+
+    public static String formatSymbolASCII(String symbol, int position) {
+        String topLine = "| " + symbol + "         |";
+        String bottomLine = "|         " + symbol + " |";
+
+        switch (position) {
+            case 1:
+                if (symbol.length() > 1) {
+                    topLine = "| " + symbol + "        |";
+                }
+                return topLine;
+            case 2:
+                if (symbol.length() > 1) {
+                    bottomLine = "|        " + symbol + " |";
+                }
+                return bottomLine;
+        }
+        return topLine;
+    }
 }
+
