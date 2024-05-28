@@ -114,9 +114,6 @@ public class Poker extends Game {
 
         while (!allBet) {
             if (playersInTheRound.size() == 1) {
-                System.out.println("end of round, only one player left");
-                System.out.println(playersInTheRound);
-                System.out.println(players);
                 currentWinners.add(playersInTheRound.get(0));
                 return true;
             }
@@ -124,14 +121,11 @@ public class Poker extends Game {
             HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards, poorestPlayerChips);
             if (playerChoice.get("choice") == "fold") {
                 playersInTheRound.remove(positionOnTable);
-                System.out.println(positionOnTable);
-                System.out.println(positionOnTable%playersInTheRound.size());
                 positionOnTable=positionOnTable%playersInTheRound.size();
                 if(playersInTheRound.get(positionOnTable).playerCurrentBet==currentBet) {
                     allBet=true;
                 }
-                System.out.println(playersInTheRound);
-                System.out.println(players);
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else if (playerChoice.get("choice") == "call") {
                 currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
                 count++;
@@ -150,7 +144,11 @@ public class Poker extends Game {
                 System.out.println("Argh");
             }
         }
-        positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+
+        if (playersInTheRound.size() == 1) {
+            currentWinners.add(playersInTheRound.get(0));
+            return true;
+        }
         return false;
     }
 
@@ -169,10 +167,8 @@ public class Poker extends Game {
         int count = 0;
 
         while (!allBet) {
+
             if (playersInTheRound.size() == 1) {
-                System.out.println("end of round, only one player left");
-                System.out.println(playersInTheRound);
-                System.out.println(players);
                 currentWinners.add(playersInTheRound.get(0));
                 return true;
             }
@@ -180,14 +176,11 @@ public class Poker extends Game {
             HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards, poorestPlayerChips);
             if (playerChoice.get("choice") == "fold") {
                 playersInTheRound.remove(positionOnTable);
-                System.out.println(positionOnTable);
-                System.out.println(positionOnTable%playersInTheRound.size());
                 positionOnTable=positionOnTable%playersInTheRound.size();
                 if(playersInTheRound.get(positionOnTable).playerCurrentBet==currentBet) {
                     allBet=true;
                 }
-                System.out.println(playersInTheRound);
-                System.out.println(players);
+                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else if (playerChoice.get("choice") == "call") {
                 currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
                 count++;
@@ -207,7 +200,11 @@ public class Poker extends Game {
                 System.out.println("Argh");
             }
         }
-        positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
+
+        if (playersInTheRound.size() == 1) {
+            currentWinners.add(playersInTheRound.get(0));
+            return true;
+        }
         return false;
     }
 
