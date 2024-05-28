@@ -10,7 +10,7 @@ public class HandComparer {
     public static HashMap<String, Object> compareTwoHands(PokerHand pokerHand1, PokerHand pokerHand2) {
 
         HashMap<String, Object> returnHashMap = new HashMap<>();
-        //Done :)
+
         boolean hasRoyalFlush1 = (boolean) PokerHandChecker.RoyalFlushCheck(pokerHand1).get("hasRoyalFlush");
         boolean hasRoyalFlush2 = (boolean) PokerHandChecker.RoyalFlushCheck(pokerHand2).get("hasRoyalFlush");
         if (hasRoyalFlush1 && hasRoyalFlush2) {
@@ -27,7 +27,6 @@ public class HandComparer {
             return returnHashMap;
         }
 
-        //Done
         boolean hasStraightFlush1 = (boolean) PokerHandChecker.StraightFlushCheck(pokerHand1).get("hasStraightFlush");
         boolean hasStraightFlush2 = (boolean) PokerHandChecker.StraightFlushCheck(pokerHand2).get("hasStraightFlush");
         if (hasStraightFlush1 && hasStraightFlush2) {
@@ -57,7 +56,6 @@ public class HandComparer {
             return returnHashMap;
         }
 
-        //Need to update as additional comparison is unnecessary
         boolean hasFourOfAKind1 = (boolean) PokerHandChecker.FourOfAKindCheck(pokerHand1).get("hasFourOfAKind");
         boolean hasFourOfAKind2 = (boolean) PokerHandChecker.FourOfAKindCheck(pokerHand2).get("hasFourOfAKind");
         if (hasFourOfAKind1 && hasFourOfAKind2) {
@@ -99,7 +97,6 @@ public class HandComparer {
         }
 
 
-        //Done
         boolean hasFullHouse1 = (boolean) PokerHandChecker.FullHouseCheck(pokerHand1).get("hasFullHouse");
         boolean hasFullHouse2 = (boolean) PokerHandChecker.FullHouseCheck(pokerHand2).get("hasFullHouse");
         if (hasFullHouse1 && hasFullHouse2) {
@@ -141,7 +138,6 @@ public class HandComparer {
             return returnHashMap;
         }
 
-        //Done
         boolean hasFlush1 = (boolean) PokerHandChecker.FlushCheck(pokerHand1).get("hasFlush");
         boolean hasFlush2 = (boolean) PokerHandChecker.FlushCheck(pokerHand2).get("hasFlush");
         if (hasFlush1 && hasFlush2) {
@@ -172,7 +168,6 @@ public class HandComparer {
             return returnHashMap;
         }
 
-        //Done
         boolean hasStraight1 = (boolean) PokerHandChecker.StraightCheck(pokerHand1).get("hasStraight");
         boolean hasStraight2 = (boolean) PokerHandChecker.StraightCheck(pokerHand2).get("hasStraight");
         if (hasStraight1 && hasStraight2) {
@@ -201,7 +196,6 @@ public class HandComparer {
             return returnHashMap;
         }
 
-        //Need to update as additional comparison is unnecessary
         boolean hasThreeOfAKind1 = (boolean) PokerHandChecker.ThreeOfAKindCheck(pokerHand1).get("hasThreeOfAKind");
         boolean hasThreeOfAKind2 = (boolean) PokerHandChecker.ThreeOfAKindCheck(pokerHand2).get("hasThreeOfAKind");
         if (hasThreeOfAKind1 && hasThreeOfAKind2) {
@@ -216,10 +210,6 @@ public class HandComparer {
                 returnHashMap.put("reason", "higher 3 of a kind");
                 return returnHashMap;
             } else {
-//                System.out.println("Cannot have 2 lots of 3 of a kind that are the same suite");
-//                returnHashMap.put("result", 0);
-//                returnHashMap.put("reason", "same 3 of a kind");
-//                return returnHashMap;
                 ArrayList<Card> remainingCards1 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand1).get("remainingCards");
                 ArrayList<Card> remainingCards2 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand2).get("remainingCards");
 
@@ -249,7 +239,6 @@ public class HandComparer {
         }
 
 
-        //Done
         boolean hasTwoPair1 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand1).get("hasTwoPair");
         boolean hasTwoPair2 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand2).get("hasTwoPair");
         if (hasTwoPair1 && hasTwoPair2) {
@@ -303,7 +292,6 @@ public class HandComparer {
         }
 
 
-        //Done
         boolean hasPair1 = (boolean) PokerHandChecker.PairCheck(pokerHand1).get("hasPair");
         boolean hasPair2 = (boolean) PokerHandChecker.PairCheck(pokerHand2).get("hasPair");
         if (hasPair1 && hasPair2) {
@@ -348,7 +336,6 @@ public class HandComparer {
         }
 
 
-        //Done
         ArrayList<Card> highCard1 = PokerHandChecker.HighCardCheck(pokerHand1);
         ArrayList<Card> highCard2 = PokerHandChecker.HighCardCheck(pokerHand2);
         for (int i = 0; i < 5; i++) {
@@ -366,8 +353,6 @@ public class HandComparer {
         returnHashMap.put("result", 0);
         returnHashMap.put("reason", "all same high cards");
         return returnHashMap;
-
-
     }
 
 

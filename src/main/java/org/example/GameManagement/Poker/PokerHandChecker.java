@@ -303,10 +303,8 @@ public class PokerHandChecker {
     }
 
     public static ArrayList<Card> HighCardCheck(PokerHand hand) {
-        ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream()
+        return (ArrayList<Card>) hand.pokerHand.stream()
                 .sorted((a, b) -> b.getValue() - a.getValue()).limit(5).collect(Collectors.toList());
-        return remainingCards;
-
     }
 
 
