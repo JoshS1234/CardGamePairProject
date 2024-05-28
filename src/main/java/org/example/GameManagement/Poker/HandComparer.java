@@ -63,7 +63,7 @@ public class HandComparer {
         if (hasFourOfAKind1 && hasFourOfAKind2) {
             int fourOfAKindValue1 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand1).get("fourOfAKindValue");
             int fourOfAKindValue2 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand2).get("fourOfAKindValue");
-            if ( fourOfAKindValue1 >fourOfAKindValue2 ) {
+            if (fourOfAKindValue1 > fourOfAKindValue2) {
                 returnHashMap.put("result", 1);
                 returnHashMap.put("reason", "better 4 of a kind");
                 return returnHashMap;
@@ -72,19 +72,21 @@ public class HandComparer {
                 returnHashMap.put("reason", "better 4 of a kind");
                 return returnHashMap;
             } else {
-                System.out.println("Cannot have 2 lots of four of a kind that are the same suite");
-                returnHashMap.put("result", 0);
-                returnHashMap.put("reason", "same 4 of a kind");
-                return returnHashMap;
-//                int highCard1 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand1).get(2);
-//                int highCard2 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand2).get(2);
-//                if (highCard1 > highCard2 ) {
-//                    return 1;
-//                } else if (highCard2>highCard1) {
-//                    return 2;
-//                } else {
-//                    return 0;
-//                }
+                int highCard1 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand1).get("finalCardValue");
+                int highCard2 = (int) PokerHandChecker.FourOfAKindCheck(pokerHand2).get("finalCardValue");
+                if (highCard1 > highCard2) {
+                    returnHashMap.put("result", 1);
+                    returnHashMap.put("reason", "same 4 of a kind, better high card");
+                    return returnHashMap;
+                } else if (highCard2 > highCard1) {
+                    returnHashMap.put("result", 2);
+                    returnHashMap.put("reason", "same 4 of a kind, better high card");
+                    return returnHashMap;
+                } else {
+                    returnHashMap.put("result", 0);
+                    returnHashMap.put("reason", "same 4 of a kind, same high card");
+                    return returnHashMap;
+                }
             }
         } else if (hasFourOfAKind1) {
             returnHashMap.put("result", 1);
@@ -146,7 +148,7 @@ public class HandComparer {
             ArrayList<Card> flushCards1 = (ArrayList<Card>) PokerHandChecker.FlushCheck(pokerHand1).get("flushCards");
             ArrayList<Card> flushCards2 = (ArrayList<Card>) PokerHandChecker.FlushCheck(pokerHand2).get("flushCards");
 
-            for (int i=0; i<5; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (flushCards1.get(i).getValue() > flushCards2.get(i).getValue()) {
                     returnHashMap.put("result", 1);
                     returnHashMap.put("reason", "higher flush");
@@ -214,23 +216,27 @@ public class HandComparer {
                 returnHashMap.put("reason", "higher 3 of a kind");
                 return returnHashMap;
             } else {
-                System.out.println("Cannot have 2 lots of 3 of a kind that are the same suite");
+//                System.out.println("Cannot have 2 lots of 3 of a kind that are the same suite");
+//                returnHashMap.put("result", 0);
+//                returnHashMap.put("reason", "same 3 of a kind");
+//                return returnHashMap;
+                ArrayList<Card> remainingCards1 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand1).get("remainingCards");
+                ArrayList<Card> remainingCards2 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand2).get("remainingCards");
+
+                for (int i = 0; i < 2; i++) {
+                    if (remainingCards1.get(i).getValue() > remainingCards2.get(i).getValue()) {
+                        returnHashMap.put("result", 1);
+                        returnHashMap.put("reason", "same 3 of a kind, better high cards");
+                        return returnHashMap;
+                    } else if (remainingCards2.get(i).getValue() > remainingCards1.get(i).getValue()) {
+                        returnHashMap.put("result", 2);
+                        returnHashMap.put("reason", "same 3 of a kind, better high cards");
+                        return returnHashMap;
+                    }
+                }
                 returnHashMap.put("result", 0);
-                returnHashMap.put("reason", "same 3 of a kind");
+                returnHashMap.put("reason", "same 3 of a kind, same high cards");
                 return returnHashMap;
-//                ArrayList<Card> remainingCards1 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand1).get(2);
-//                ArrayList<Card> remainingCards2 = (ArrayList<Card>) PokerHandChecker.ThreeOfAKindCheck(pokerHand2).get(2);
-//                System.out.println(remainingCards1);
-//                System.out.println(remainingCards2);
-//
-//                for (int i=0; i<2; i++) {
-//                    if (remainingCards1.get(i).getValue() > remainingCards2.get(i).getValue()) {
-//                        return 1;
-//                    } else if (remainingCards2.get(i).getValue() > remainingCards1.get(i).getValue()) {
-//                        return 2;
-//                    }
-//                }
-//                return 0;
             }
         } else if (hasThreeOfAKind1) {
             returnHashMap.put("result", 1);
@@ -245,7 +251,7 @@ public class HandComparer {
 
         //Done
         boolean hasTwoPair1 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand1).get("hasTwoPair");
-        boolean hasTwoPair2 =  (boolean) PokerHandChecker.TwoPairCheck(pokerHand2).get("hasTwoPair");
+        boolean hasTwoPair2 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand2).get("hasTwoPair");
         if (hasTwoPair1 && hasTwoPair2) {
             int higherPair1 = (int) PokerHandChecker.TwoPairCheck(pokerHand1).get("topValue1");
             int higherPair2 = (int) PokerHandChecker.TwoPairCheck(pokerHand2).get("topValue1");
@@ -316,7 +322,7 @@ public class HandComparer {
                 ArrayList<Card> remainingCards2 = (ArrayList<Card>) PokerHandChecker.PairCheck(pokerHand2).get("remainingCards");
 
 
-                for (int i=0; i<3; i++) {
+                for (int i = 0; i < 3; i++) {
                     if (remainingCards1.get(i).getValue() > remainingCards2.get(i).getValue()) {
                         returnHashMap.put("result", 1);
                         returnHashMap.put("reason", "higher remaining card after pair");
@@ -345,7 +351,7 @@ public class HandComparer {
         //Done
         ArrayList<Card> highCard1 = PokerHandChecker.HighCardCheck(pokerHand1);
         ArrayList<Card> highCard2 = PokerHandChecker.HighCardCheck(pokerHand2);
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             if (highCard1.get(i).getValue() > highCard2.get(i).getValue()) {
                 returnHashMap.put("result", 1);
                 returnHashMap.put("reason", "higher card");
@@ -362,9 +368,7 @@ public class HandComparer {
         return returnHashMap;
 
 
-
     }
-
 
 
 }

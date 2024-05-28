@@ -109,7 +109,6 @@ public class PokerHandChecker {
     }
 
 
-    //CHECK HIGH CARD BIT
     public static HashMap<String, Object> FourOfAKindCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         HashMap<String, Object> returnHashMap = new HashMap<>();
@@ -118,9 +117,9 @@ public class PokerHandChecker {
                 returnHashMap.put("hasFourOfAKind", true);
                 returnHashMap.put("fourOfAKindValue", key);
 
-//                ArrayList<Card> filteredHand = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).collect(Collectors.toList());
-//                filteredHand = (ArrayList<Card>) filteredHand.stream().sorted((a, b) -> b.getValue() - a.getValue()).collect(Collectors.toList());
-//                returnArr.add(filteredHand.get(0));
+                ArrayList<Card> filteredHand = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).collect(Collectors.toList());
+                filteredHand = (ArrayList<Card>) filteredHand.stream().sorted((a, b) -> b.getValue() - a.getValue()).collect(Collectors.toList());
+                returnHashMap.put("finalCardValue", filteredHand.get(0).getValue());
 
                 return returnHashMap;
             }
@@ -131,7 +130,6 @@ public class PokerHandChecker {
         return returnHashMap;
     }
 
-    //DONE
     public static HashMap<String, Object> FullHouseCheck(PokerHand hand) {
         HashMap<Integer, ArrayList<Card>> valueMap = splitByValue(hand);
         int topValue1 = 0;
@@ -229,8 +227,10 @@ public class PokerHandChecker {
                     topValue = valueMap.get(key).get(0).getValue();
                     returnHashMap.put("hasThreeOfAKind", hasThreeOfAKind);
                     returnHashMap.put("value", topValue);
-//                    ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).sorted((a, b) -> b.getValue() - a.getValue()).limit(2).collect(Collectors.toList());
-//                    returnHashMap.put("remainingCards", remainingCards);
+
+
+                    ArrayList<Card> remainingCards = (ArrayList<Card>) hand.pokerHand.stream().filter(card -> !Objects.equals(card.getValue(), key)).sorted((a, b) -> b.getValue() - a.getValue()).limit(2).collect(Collectors.toList());
+                    returnHashMap.put("remainingCards", remainingCards);
                 }
 
             }

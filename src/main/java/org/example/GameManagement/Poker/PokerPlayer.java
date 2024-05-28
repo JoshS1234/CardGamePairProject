@@ -15,8 +15,18 @@ public class PokerPlayer {
     private int position;
     public PokerHand pokerhand = new PokerHand();
     public PokerHand totalHandWithCentralCards = new PokerHand();
-    public int playerCurrentBet = 0;
-    public boolean hasBetThisRound=false;
+    private int playerCurrentBet = 0;
+    private boolean hasBetThisRound=false;
+
+    public int getPlayerCurrentBet() {
+        return playerCurrentBet;
+    }
+
+    public void setPlayerCurrentBet(int playerCurrentBet) {
+        this.playerCurrentBet = playerCurrentBet;
+    }
+
+
 
     public String getName() {
         return name;
