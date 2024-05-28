@@ -114,11 +114,8 @@ public class Poker extends Game {
 
         int currentBet = 0;
         boolean allBet = false;
-//        int count = 0;
 
         for(PokerPlayer player : playersInTheRound) {
-            System.out.println(player);
-            System.out.println(player.hasBetThisRound);
             player.hasBetThisRound=false;
         }
 
@@ -127,31 +124,19 @@ public class Poker extends Game {
                 currentWinners.add(playersInTheRound.get(0));
                 return true;
             }
-//            if (playersInTheRound.get(positionOnTable).hasBetThisRound==false) {
-//                return false;
-//            }
 
             HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards, poorestPlayerChips);
             if (playerChoice.get("choice") == "fold") {
                 playersInTheRound.remove(positionOnTable);
                 positionOnTable=positionOnTable%playersInTheRound.size();
-//                if(playersInTheRound.get(positionOnTable).playerCurrentBet==currentBet) {
-//                    allBet=true;
-//                }
             } else if (playerChoice.get("choice") == "call") {
                 currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
-//                count++;
-//                if (count == playersInTheRound.size()) {
-//                    allBet = true;
-//                }
                 playersInTheRound.get(positionOnTable).hasBetThisRound=true;
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else if (playerChoice.get("choice") == "raise") {
-                //If someone raises, then someone else re-raises, it is broken currently
                 int raiseAmount = playersInTheRound.get(positionOnTable).raise(currentBet, poorestPlayerChips);
                 currentPot += raiseAmount;
                 currentBet = raiseAmount;
-//                count = 1;
                 for(PokerPlayer player : playersInTheRound) {
                     player.hasBetThisRound=false;
                 }
@@ -161,6 +146,7 @@ public class Poker extends Game {
                 System.out.println("Argh");
             }
 
+            //checks if next player has bet already, if so, ends the betting round
             if (playersInTheRound.get(positionOnTable).hasBetThisRound) {
                 allBet=true;
             }
@@ -172,68 +158,6 @@ public class Poker extends Game {
         }
         return false;
     }
-
-
-//    public boolean playBettingRound() {
-//        positionOnTable = startingPositionOnTable;
-//        int poorestPlayerChips = 901;
-//        for (PokerPlayer player : players) {
-//            if (player.getChips() < poorestPlayerChips) {
-//                poorestPlayerChips = player.getChips();
-//            }
-//        }
-//
-//        int currentBet = 0;
-//        boolean allBet = false;
-////        int count = 0;
-//
-//        while (!allBet) {
-//            if(onePlayerLeftCheck()){
-//                currentWinners.add(playersInTheRound.get(0));
-//                return true;
-//            }
-//
-//            HashMap<String, Object> playerChoice = playersInTheRound.get(positionOnTable).playerTurn(currentBet, centralCards, poorestPlayerChips);
-//            if (playerChoice.get("choice") == "fold") {
-//                playersInTheRound.remove(positionOnTable);
-//                positionOnTable=positionOnTable%playersInTheRound.size();
-////                if(playersInTheRound.get(positionOnTable).playerCurrentBet==currentBet) {
-////                    allBet=true;
-////                }
-//            } else if (playerChoice.get("choice") == "call") {
-//                currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
-////                count++;
-////                if (count == playersInTheRound.size()) {
-////                    allBet = true;
-////                }
-//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
-//                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
-//            } else if (playerChoice.get("choice") == "raise") {
-//                //If someone raises, then someone else re-raises, it is broken currently
-//                int raiseAmount = playersInTheRound.get(positionOnTable).raise(currentBet, poorestPlayerChips);
-//                currentPot += raiseAmount;
-//                currentBet = raiseAmount;
-////                count = 1;
-//                positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
-//                for(PokerPlayer player : playersInTheRound) {
-//                    player.hasBetThisRound=false;
-//                }
-//                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
-//            } else {
-//                System.out.println("Argh");
-//            }
-//
-//            if (playersInTheRound.stream().filter(player-> player.hasBetThisRound).count()==playersInTheRound.size()) {
-//                allBet=true;
-//            }
-//        }
-//
-//        if(onePlayerLeftCheck()){
-//            currentWinners.add(playersInTheRound.get(0));
-//            return true;
-//        }
-//        return false;
-//    }
 
     public ArrayList<PokerPlayer> playRound() {
         //first betting round
@@ -273,7 +197,6 @@ public class Poker extends Game {
 
 
         //decide the winner (if there has not been one already)
-
         return decideWinner();
 
     }
