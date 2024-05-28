@@ -1,17 +1,19 @@
 package org.example.ASCIIArt;
 
+import org.example.CardSetup.Card;
+
 public class DrawCards {
 
-    public static void drawCard(String suite, String symbol) {
+    public static void drawCard(Card card) {
 
         System.out.println(" ----------- ");
-        System.out.println("| " + symbol + "         |");
-        System.out.println("| " + suite + "         |");
+        System.out.println("| " + card.getSymbol() + "         |");
+        System.out.println("| " + card.getSuite() + "         |");
         System.out.println("|           |");
-        System.out.println("|     " + symbol + "     |");
+        System.out.println("|     " + card.getSuite() + "     |");
         System.out.println("|           |");
-        System.out.println("|         " + symbol + " |");
-        System.out.println("|         " + suite + " |");
+        System.out.println("|         " + card.getSuite() + " |");
+        System.out.println("|         " + card.getSymbol() + " |");
         System.out.println(" ----------- ");
     }
 }

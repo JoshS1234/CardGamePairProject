@@ -79,7 +79,7 @@ public class Snap extends Game {
 
             //Deal initial two cards
             Card playerCard = DealCards.dealPlayerCard(deck);
-            DrawCards.drawCard(playerCard.getSuite(), playerCard.getSymbol());
+            DrawCards.drawCard(playerCard);
             Card computerCard = DealCards.dealComputerCard(deck);
 
             //Check that the gameMode will not be null
