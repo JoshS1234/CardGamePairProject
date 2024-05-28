@@ -46,7 +46,6 @@ public class PokerUserMessages extends UserMessages {
         System.out.println("           First Round of betting                 ");
         System.out.println("--------------------------------------------------");
         UserMessages.getUserPressEnterResponse("Press enter to begin betting");
-
     }
 
     public static void bettingRoundAnnouncement(ArrayList<Card> cards) {
