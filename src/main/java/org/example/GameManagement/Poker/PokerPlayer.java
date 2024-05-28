@@ -6,6 +6,8 @@ import org.example.utils.UserMessages;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.example.ASCIIArt.DrawCards.drawManyCards;
+
 public class PokerPlayer {
 
     private String name;
@@ -46,9 +48,7 @@ public class PokerPlayer {
             System.out.println("There are no cards on the table yet");
         } else {
             System.out.println("Cards on the table are: ");
-            for (Card card : cardsOnTable) {
-                System.out.println(card);
-            }
+            drawManyCards(cardsOnTable);
         }
         System.out.println("You have: " + this.chips + " chips" + " (+ " + this.playerCurrentBet + " chips already staked)");
         System.out.println("Current bet is: " + currentBet);
@@ -137,7 +137,8 @@ public class PokerPlayer {
         System.out.println("----------------------------");
         System.out.println("Hi " + this.name + "!");
         System.out.println("Cards in your hand are: ");
-        this.pokerhand.printHand();
+//        this.pokerhand.printHand();
+        drawManyCards(this.pokerhand.pokerHand);
     }
 
 
