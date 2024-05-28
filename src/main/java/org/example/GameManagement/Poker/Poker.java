@@ -116,7 +116,7 @@ public class Poker extends Game {
         boolean allBet = false;
 
         for(PokerPlayer player : playersInTheRound) {
-            player.hasBetThisRound=false;
+            player.setHasBetThisRound(false);
         }
 
         while (!allBet) {
@@ -131,23 +131,23 @@ public class Poker extends Game {
                 positionOnTable=positionOnTable%playersInTheRound.size();
             } else if (playerChoice.get("choice") == "call") {
                 currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
-                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
+                playersInTheRound.get(positionOnTable).setHasBetThisRound(true);
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else if (playerChoice.get("choice") == "raise") {
                 int raiseAmount = playersInTheRound.get(positionOnTable).raise(currentBet, poorestPlayerChips);
                 currentPot += raiseAmount;
                 currentBet = raiseAmount;
                 for(PokerPlayer player : playersInTheRound) {
-                    player.hasBetThisRound=false;
+                    player.setHasBetThisRound(false);
                 }
-                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
+                playersInTheRound.get(positionOnTable).setHasBetThisRound(true);
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else {
                 System.out.println("Argh");
             }
 
             //checks if next player has bet already, if so, ends the betting round
-            if (playersInTheRound.get(positionOnTable).hasBetThisRound) {
+            if (playersInTheRound.get(positionOnTable).isHasBetThisRound()) {
                 allBet=true;
             }
         }
