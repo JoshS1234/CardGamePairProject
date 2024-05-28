@@ -7,16 +7,22 @@ import java.util.Objects;
 
 public class DrawCards {
 
+    public static final String colourReset = "\u001b[0m";
+
+    public static final String black = "\u001B[30m";
+    public static final String whiteBG = "\u001B[47m";
+
     public static void drawCard(Card card) {
-        System.out.println(" ----------- ");
-        System.out.println("| " + card.getSymbol() + "         |");
-        System.out.println("| " + card.getSuite() + "         |");
-        System.out.println("|           |");
-        System.out.println("|     " + card.getSuite() + "     |");
-        System.out.println("|           |");
-        System.out.println("|         " + card.getSuite() + " |");
-        System.out.println("|         " + card.getSymbol() + " |");
-        System.out.println(" ----------- ");
+
+        System.out.println(black + whiteBG + " ----------- " + colourReset);
+        System.out.println(black + whiteBG + formatSymbolASCII(card.getSymbol(), 1) + colourReset);
+        System.out.println(black + whiteBG + "| " + card.getSuite() + "         |" + colourReset);
+        System.out.println(black + whiteBG + "|           |" + colourReset);
+        System.out.println(black + whiteBG + "|     " + card.getSuite() + "     |" + colourReset);
+        System.out.println(black + whiteBG + "|           |" + colourReset);
+        System.out.println(black + whiteBG + "|         " + card.getSuite() + " |" + colourReset);
+        System.out.println(black + whiteBG + formatSymbolASCII(card.getSymbol(), 2) + colourReset);
+        System.out.println(black + whiteBG + " ----------- " + colourReset);
     }
 
     public static void drawManyCards(ArrayList<Card> cards) {
@@ -33,23 +39,23 @@ public class DrawCards {
         String l9="";
 
         for (Card card : cards) {
-             l1+=" ----------- " + "  ";
+             l1+=black + whiteBG + " ----------- " + "  "+ colourReset;
              if (Objects.equals(card.getSymbol(), "10")){
-                 l2+="| " + card.getSymbol() + "        |" + "  ";
+                 l2+=black + whiteBG + "| " + card.getSymbol() + "        |" + "  "+ colourReset;
              } else {
-                 l2+="| " + card.getSymbol() + "         |" + "  ";
+                 l2+=black + whiteBG + "| " + card.getSymbol() + "         |" + "  "+ colourReset;
              }
-             l3+="| " + card.getSuite() + "         |" + "  ";
-             l4+="|           |" + "  ";
-             l5+="|     " + card.getSuite() + "     |"+"  ";
-             l6+="|           |"+"  ";
-             l7+="|         " + card.getSuite() + " |"+"  ";
+             l3+=black + whiteBG + "| " + card.getSuite() + "         |" + "  "+ colourReset;
+             l4+=black + whiteBG + "|           |" + "  "+ colourReset;
+             l5+=black + whiteBG + "|     " + card.getSuite() + "     |"+"  "+ colourReset;
+             l6+=black + whiteBG + "|           |"+"  "+ colourReset;
+             l7+=black + whiteBG + "|         " + card.getSuite() + " |"+"  "+ colourReset;
             if (Objects.equals(card.getSymbol(), "10")){
-                l8+="|        " + card.getSymbol() + " |" + "  ";
+                l8+=black + whiteBG + "|        " + card.getSymbol() + " |" + "  "+ colourReset;
             } else {
-                l8+="|         " + card.getSymbol() + " |" + "  ";
+                l8+=black + whiteBG + "|         " + card.getSymbol() + " |" + "  "+ colourReset;
             }
-             l9+=" ----------- "+"  ";
+             l9+=black + whiteBG + " ----------- "+"  "+ colourReset;
         }
 
         System.out.println(l1);
@@ -61,5 +67,24 @@ public class DrawCards {
         System.out.println(l7);
         System.out.println(l8);
         System.out.println(l9);
+    }
+
+    public static String formatSymbolASCII(String symbol, int position) {
+        String topLine = "| " + symbol + "         |";
+        String bottomLine = "|         " + symbol + " |";
+
+        switch (position) {
+            case 1:
+                if (symbol.length() > 1) {
+                    topLine = "| " + symbol + "        |";
+                }
+                return topLine;
+            case 2:
+                if (symbol.length() > 1) {
+                    bottomLine = "|        " + symbol + " |";
+                }
+                return bottomLine;
+        }
+        return topLine;
     }
 }
