@@ -1,5 +1,6 @@
 package org.example.GameManagement.Snap;
 
+import org.example.ASCIIArt.DrawCards;
 import org.example.CardSetup.Card;
 import org.example.CardSetup.Deck;
 
@@ -23,6 +24,9 @@ public class DealCards {
         playerScanner.nextLine();
         playerCard = deck.dealCard();
 
+        //Draw dealt card
+        DrawCards.drawCard(playerCard);
+
         //Show card drawn
         System.out.println("Player card: " + playerCard);
 
@@ -40,6 +44,9 @@ public class DealCards {
 
         //Deal the computer a card
         computerCard = deck.dealCard();
+
+        //Draw dealt card
+        DrawCards.drawCard(computerCard);
 
         //Show card drawn
         System.out.println("Computer card: " + computerCard);
