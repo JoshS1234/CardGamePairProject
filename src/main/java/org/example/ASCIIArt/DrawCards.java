@@ -39,23 +39,23 @@ public class DrawCards {
         String l9="";
 
         for (Card card : cards) {
-             l1+=black + whiteBG + " ----------- " + "  "+ colourReset;
+             l1+=black + whiteBG + " ----------- " + colourReset +  "  ";
              if (Objects.equals(card.getSymbol(), "10")){
-                 l2+=black + whiteBG + "| " + card.getSymbol() + "        |" + "  "+ colourReset;
+                 l2+=black + whiteBG + "| " + card.getSymbol() + "        |"  + colourReset+ "  ";
              } else {
-                 l2+=black + whiteBG + "| " + card.getSymbol() + "         |" + "  "+ colourReset;
+                 l2+=black + whiteBG + "| " + card.getSymbol() + "         |"  + colourReset+ "  ";
              }
-             l3+=black + whiteBG + "| " + card.getSuite() + "         |" + "  "+ colourReset;
-             l4+=black + whiteBG + "|           |" + "  "+ colourReset;
-             l5+=black + whiteBG + "|     " + card.getSuite() + "     |"+"  "+ colourReset;
-             l6+=black + whiteBG + "|           |"+"  "+ colourReset;
-             l7+=black + whiteBG + "|         " + card.getSuite() + " |"+"  "+ colourReset;
+             l3+=black + whiteBG + "| " + card.getSuite() + "         |"  + colourReset+ "  ";
+             l4+=black + whiteBG + "|           |"  + colourReset+ "  "+ colourReset;
+             l5+=black + whiteBG + "|     " + card.getSuite() + "     |" + colourReset+"  ";
+             l6+=black + whiteBG + "|           |" + colourReset+"  ";
+             l7+=black + whiteBG + "|         " + card.getSuite() + " |" + colourReset+"  ";
             if (Objects.equals(card.getSymbol(), "10")){
-                l8+=black + whiteBG + "|        " + card.getSymbol() + " |" + "  "+ colourReset;
+                l8+=black + whiteBG + "|        " + card.getSymbol() + " |"  + colourReset+ "  ";
             } else {
-                l8+=black + whiteBG + "|         " + card.getSymbol() + " |" + "  "+ colourReset;
+                l8+=black + whiteBG + "|         " + card.getSymbol() + " |"  + colourReset+ "  ";
             }
-             l9+=black + whiteBG + " ----------- "+"  "+ colourReset;
+             l9+=black + whiteBG + " ----------- " + colourReset+"  ";
         }
 
         System.out.println(l1);

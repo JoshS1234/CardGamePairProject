@@ -12,6 +12,8 @@ import org.example.GameManagement.Snap.Snap;
 import org.example.utils.CompareCards;
 import org.example.utils.SortMethods;
 
+import static org.example.ASCIIArt.DrawCards.drawManyCards;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -40,31 +42,39 @@ public class Main {
 
 
 
-//        Deck deck = new Deck();
-//        deck.shuffleDeck();
-//        PokerHand testPokerHand1 = new PokerHand();
+        Deck deck = new Deck();
+        deck.shuffleDeck();
+        PokerHand testPokerHand1 = new PokerHand();
+        testPokerHand1.add(new Card("8", "club"));
+        testPokerHand1.add(new Card("8", "heart"));
+        testPokerHand1.add(new Card("9", "club"));
+        testPokerHand1.add(new Card("8", "diamond"));
+        testPokerHand1.add(new Card("J", "spade"));
+        testPokerHand1.add(new Card("6", "heart"));
+        testPokerHand1.add(new Card("K", "heart"));
 //        for (int i=0; i<7; i++) {
 //            Card card = deck.dealCard();
 //            testPokerHand1.add(card);
 //        }
 //        testPokerHand1.printHand();
 //        System.out.println("---------------");
-//        PokerHand testPokerHand2 = new PokerHand();
+        PokerHand testPokerHand2 = new PokerHand();
 //        for (int i=0; i<7; i++) {
 //            Card card = deck.dealCard();
 //            testPokerHand2.add(card);
 //        }
+//        drawManyCards(testPokerHand2.pokerHand);
 //        testPokerHand2.printHand();
-////        testPokerHand2.add(new Card("3", "club"));
-////        testPokerHand2.add(new Card("8", "heart"));
-////        testPokerHand2.add(new Card("9", "club"));
-////        testPokerHand2.add(new Card("2", "diamond"));
-////        testPokerHand2.add(new Card("J", "heart"));
-////        testPokerHand2.add(new Card("6", "heart"));
-////        testPokerHand2.add(new Card("K", "heart"));
+        testPokerHand2.add(new Card("8", "club"));
+        testPokerHand2.add(new Card("8", "heart"));
+        testPokerHand2.add(new Card("9", "club"));
+        testPokerHand2.add(new Card("8", "diamond"));
+        testPokerHand2.add(new Card("J", "spade"));
+        testPokerHand2.add(new Card("6", "heart"));
+        testPokerHand2.add(new Card("Q", "heart"));
 //
-//        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("result"));
-//        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("reason"));
+        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("result"));
+        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("reason"));
 
 
 //        Poker poker = new Poker("Poker", "Try not to lose all your chips");
