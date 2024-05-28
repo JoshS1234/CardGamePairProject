@@ -79,5 +79,8 @@ public class Main {
 //        //Needs to be moved to some kind of command runner
 //        Snap snap = new Snap("Snap", "Be quickest to match cards");
 //        snap.play();
+        //Needs to be moved to some kind of command runner
+//        Snap snap = new Snap("Snap", "Be quickest to match cards");
+//        snap.play();
     }
 }
