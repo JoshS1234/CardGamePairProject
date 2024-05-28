@@ -20,7 +20,7 @@ public class Deck {
                 deck.add(new Card(symbols[i], s));
             }
         }
-        System.out.println(deck);
+//        System.out.println(deck);
     }
 
     public Card dealCard() {
@@ -67,9 +67,9 @@ public class Deck {
             deck.remove(selectIndex);
         }
         deck = shuffleDeck;
-        System.out.println("Random sort: ");
-        System.out.println(deck);
-        System.out.println(deck.size());
+//        System.out.println("Random sort: ");
+//        System.out.println(deck);
+//        System.out.println(deck.size());
     }
 
     public void resetDeck() {

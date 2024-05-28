@@ -5,6 +5,7 @@ import org.example.CardSetup.Deck;
 import org.example.GameManagement.Game;
 import org.example.GameManagement.GameSelector;
 import org.example.GameManagement.Poker.HandComparer;
+import org.example.GameManagement.Poker.Poker;
 import org.example.GameManagement.Poker.PokerHand;
 import org.example.GameManagement.Poker.PokerHandChecker;
 import org.example.GameManagement.Snap.Snap;
@@ -37,26 +38,37 @@ public class Main {
 //        System.out.println("No comparison: " + CompareCards.compareCards(cardFive, cardSix));
 
 
-        PokerHand testPokerHand1 = new PokerHand();
-        testPokerHand1.add(new Card("2", "spade"));
-        testPokerHand1.add(new Card("4", "heart"));
-        testPokerHand1.add(new Card("5", "diamond"));
-        testPokerHand1.add(new Card("3", "club"));
-        testPokerHand1.add(new Card("10", "club"));
-        testPokerHand1.add(new Card("8", "club"));
-        testPokerHand1.add(new Card("9", "club"));
 
-        PokerHand testPokerHand2 = new PokerHand();
-        testPokerHand2.add(new Card("3", "club"));
-        testPokerHand2.add(new Card("8", "heart"));
-        testPokerHand2.add(new Card("9", "club"));
-        testPokerHand2.add(new Card("2", "diamond"));
-        testPokerHand2.add(new Card("J", "heart"));
-        testPokerHand2.add(new Card("6", "heart"));
-        testPokerHand2.add(new Card("K", "heart"));
 
-        HandComparer handComparer = new HandComparer(testPokerHand1, testPokerHand2);
-        System.out.println(handComparer.compareTwoHands());
+//        Deck deck = new Deck();
+//        deck.shuffleDeck();
+//        PokerHand testPokerHand1 = new PokerHand();
+//        for (int i=0; i<7; i++) {
+//            Card card = deck.dealCard();
+//            testPokerHand1.add(card);
+//        }
+//        testPokerHand1.printHand();
+//        System.out.println("---------------");
+//        PokerHand testPokerHand2 = new PokerHand();
+//        for (int i=0; i<7; i++) {
+//            Card card = deck.dealCard();
+//            testPokerHand2.add(card);
+//        }
+//        testPokerHand2.printHand();
+////        testPokerHand2.add(new Card("3", "club"));
+////        testPokerHand2.add(new Card("8", "heart"));
+////        testPokerHand2.add(new Card("9", "club"));
+////        testPokerHand2.add(new Card("2", "diamond"));
+////        testPokerHand2.add(new Card("J", "heart"));
+////        testPokerHand2.add(new Card("6", "heart"));
+////        testPokerHand2.add(new Card("K", "heart"));
+//
+//        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("result"));
+//        System.out.println(HandComparer.compareTwoHands(testPokerHand1, testPokerHand2).get("reason"));
+
+
+//        Poker poker = new Poker("Poker", "Try not to lose all your chips");
+//        poker.play();
 
         GameSelector gameSelector = new GameSelector();
         while (gameSelector.startGameSelector()) {
@@ -64,6 +76,9 @@ public class Main {
             game.play();
         }
 
+//        //Needs to be moved to some kind of command runner
+//        Snap snap = new Snap("Snap", "Be quickest to match cards");
+//        snap.play();
         //Needs to be moved to some kind of command runner
 //        Snap snap = new Snap("Snap", "Be quickest to match cards");
 //        snap.play();

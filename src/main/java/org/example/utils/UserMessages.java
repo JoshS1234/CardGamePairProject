@@ -39,6 +39,22 @@ public class UserMessages {
         return Integer.parseInt(userResponse);
     }
 
+    public static String getUserPressEnterResponse(String promptForUser) {
+        Scanner myScanner = new Scanner(System.in);
+
+        System.out.println(promptForUser);
+        String userResponse = myScanner.nextLine();
+        Pattern pattern = Pattern.compile("^$");
+
+        while (!pattern.matcher(userResponse.toLowerCase()).matches()) {
+            System.out.println("Must not type anything, just press enter");
+            System.out.println(promptForUser);
+            userResponse = myScanner.nextLine();
+        }
+
+        return userResponse;
+    }
+
 
 
 
