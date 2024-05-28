@@ -15,8 +15,18 @@ public class PokerPlayer {
     private int position;
     public PokerHand pokerhand = new PokerHand();
     public PokerHand totalHandWithCentralCards = new PokerHand();
-    public int playerCurrentBet = 0;
-    public boolean hasBetThisRound=false;
+    private int playerCurrentBet = 0;
+    private boolean hasBetThisRound=false;
+
+    public int getPlayerCurrentBet() {
+        return playerCurrentBet;
+    }
+
+    public void setPlayerCurrentBet(int playerCurrentBet) {
+        this.playerCurrentBet = playerCurrentBet;
+    }
+
+
 
     public String getName() {
         return name;
@@ -32,6 +42,14 @@ public class PokerPlayer {
 
     public int getPosition() {
         return position;
+    }
+
+    public boolean isHasBetThisRound() {
+        return hasBetThisRound;
+    }
+
+    public void setHasBetThisRound(boolean hasBetThisRound) {
+        this.hasBetThisRound = hasBetThisRound;
     }
 
     public PokerPlayer(String name, int chips, int position) {
@@ -59,21 +77,10 @@ public class PokerPlayer {
                 userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call/Check\n3. Raise");
             }
         } else {
-            while (!(userChoice == 1 || userChoice == 2 || userChoice == 3)) {
+            while (!(userChoice == 1 || userChoice == 2)) {
                 userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call/Check");
             }
         }
-//        else if (currentBet < this.chips + this.playerCurrentBet && poorestPlayerChips == 0) {
-//            while (!(userChoice == 1 || userChoice == 2 || userChoice == 3)) {
-//                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call/Check");
-//            }
-//        } else if (currentBet == this.chips + this.playerCurrentBet) {
-//            while (!(userChoice == 1 || userChoice == 2)) {
-//                userChoice = UserMessages.getUserIntegerResponse("What would you like to do?\n1. Fold\n2. Call/Check");
-//            }
-//        } else {
-//            System.out.println("Error");
-//        }
 
         switch (userChoice) {
             case 1:
@@ -88,9 +95,6 @@ public class PokerPlayer {
                 System.out.println("Raise");
                 returnHashMap.put("choice", "raise");
                 break;
-            default:
-                System.out.println("Something broke");
-                returnHashMap.put("choice", "something broke");
         }
 
         return returnHashMap;
@@ -137,7 +141,6 @@ public class PokerPlayer {
         System.out.println("----------------------------");
         System.out.println("Hi " + this.name + "!");
         System.out.println("Cards in your hand are: ");
-//        this.pokerhand.printHand();
         drawManyCards(this.pokerhand.pokerHand);
     }
 

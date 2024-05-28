@@ -9,6 +9,8 @@ import org.example.utils.UserMessages;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.example.ASCIIArt.DrawCards.drawManyCards;
+
 public class Poker extends Game {
 
     ArrayList<PokerPlayer> players = new ArrayList<>();
@@ -19,6 +21,7 @@ public class Poker extends Game {
     Deck deck = new Deck();
     ArrayList<Card> centralCards = new ArrayList<>();
     ArrayList<PokerPlayer> currentWinners = new ArrayList<>();
+    String currentRoundReasonForWin;
 
 
     public Poker(String title, String rules) {
@@ -116,7 +119,7 @@ public class Poker extends Game {
         boolean allBet = false;
 
         for(PokerPlayer player : playersInTheRound) {
-            player.hasBetThisRound=false;
+            player.setHasBetThisRound(false);
         }
 
         while (!allBet) {
@@ -131,23 +134,23 @@ public class Poker extends Game {
                 positionOnTable=positionOnTable%playersInTheRound.size();
             } else if (playerChoice.get("choice") == "call") {
                 currentPot += playersInTheRound.get(positionOnTable).call(currentBet);
-                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
+                playersInTheRound.get(positionOnTable).setHasBetThisRound(true);
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else if (playerChoice.get("choice") == "raise") {
                 int raiseAmount = playersInTheRound.get(positionOnTable).raise(currentBet, poorestPlayerChips);
                 currentPot += raiseAmount;
                 currentBet = raiseAmount;
                 for(PokerPlayer player : playersInTheRound) {
-                    player.hasBetThisRound=false;
+                    player.setHasBetThisRound(false);
                 }
-                playersInTheRound.get(positionOnTable).hasBetThisRound=true;
+                playersInTheRound.get(positionOnTable).setHasBetThisRound(true);
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else {
                 System.out.println("Argh");
             }
 
             //checks if next player has bet already, if so, ends the betting round
-            if (playersInTheRound.get(positionOnTable).hasBetThisRound) {
+            if (playersInTheRound.get(positionOnTable).isHasBetThisRound()) {
                 allBet=true;
             }
         }
@@ -203,18 +206,23 @@ public class Poker extends Game {
 
     public void resetBets() {
         for (PokerPlayer player : players) {
-            player.playerCurrentBet = 0;
+            player.setPlayerCurrentBet(0);
             System.out.println(player.getChips());
         }
     }
 
     public void roundSummary() {
         System.out.println("Round is finished");
-        System.out.println("Winners were: ");
-        for (PokerPlayer winner : currentWinners) {
-            System.out.println(winner.getName());
-        }
+        System.out.println("Winner(s) were: ");
         int winnings = (currentPot / currentWinners.size());
+        for (PokerPlayer winner : currentWinners) {
+            System.out.println(winner.getName() + " with: " + currentRoundReasonForWin);
+            if (winner.totalHandWithCentralCards.pokerHand.isEmpty()) {
+                drawManyCards(winner.pokerhand.pokerHand);
+            } else{
+                drawManyCards(winner.totalHandWithCentralCards.pokerHand);
+            }
+        }
         System.out.println("They won " + winnings);
         for (PokerPlayer player : currentWinners) {
             player.setChips(player.getChips() + winnings);
@@ -237,29 +245,27 @@ public class Poker extends Game {
             player.totalHandWithCentralCards = new PokerHand(totalHand);
             player.totalHandWithCentralCards.add(player.pokerhand.removeCard(0));
             player.totalHandWithCentralCards.add(player.pokerhand.removeCard(0));
-            System.out.println(player.getName());
-            player.totalHandWithCentralCards.printHand();
-            System.out.println("__");
         }
 
         currentWinners = new ArrayList<>();
         currentWinners.add(playersInTheRound.get(0));
         for (int i = 1; i < playersInTheRound.size(); i++) {
-            System.out.println("comparison: " + i);
             int resultOfComparison = (int) HandComparer.compareTwoHands(currentWinners.get(0).totalHandWithCentralCards, playersInTheRound.get(i).totalHandWithCentralCards).get("result");
-            System.out.println("result: " + resultOfComparison);
             String reasonOfComparison = (String) HandComparer.compareTwoHands(currentWinners.get(0).totalHandWithCentralCards, playersInTheRound.get(i).totalHandWithCentralCards).get("reason");
-            System.out.println("reason: " + reasonOfComparison);
 
             if (resultOfComparison == 0) {
                 currentWinners.add(playersInTheRound.get(i));
+                currentRoundReasonForWin=reasonOfComparison;
             } else if (resultOfComparison == 1) {
-                System.out.println("Current winner is unchanged");
+                System.out.println(" ");
             } else if (resultOfComparison == 2) {
                 currentWinners = new ArrayList<>();
                 currentWinners.add(playersInTheRound.get(i));
+                currentRoundReasonForWin=reasonOfComparison;
             }
         }
+
+
 
         return currentWinners;
     }
