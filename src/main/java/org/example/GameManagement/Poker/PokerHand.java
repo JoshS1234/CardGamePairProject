@@ -4,7 +4,6 @@ import org.example.CardSetup.Card;
 import org.example.utils.SortMethods;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PokerHand {
 

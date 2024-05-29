@@ -111,7 +111,6 @@ public class HandComparer {
                 returnHashMap.put("reason", "better full house");
                 return returnHashMap;
             } else {
-                //Not sure this should be here
                 int twoLotsOfPlayer1 = (int) PokerHandChecker.FullHouseCheck(pokerHand1).get("twoOf");
                 int twoLotsOfPlayer2 = (int) PokerHandChecker.FullHouseCheck(pokerHand2).get("twoOf");
                 if (twoLotsOfPlayer1 > twoLotsOfPlayer2) {
