@@ -20,7 +20,6 @@ public class Deck {
                 deck.add(new Card(symbols[i], s));
             }
         }
-//        System.out.println(deck);
     }
 
     public Card dealCard() {
