@@ -7,8 +7,7 @@ import java.util.HashMap;
 
 public class HandComparer {
 
-    public static HashMap<String, Object> compareTwoHands(PokerHand pokerHand1, PokerHand pokerHand2) {
-
+    public static HashMap<String, Object> royalFlushComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
         HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasRoyalFlush1 = (boolean) PokerHandChecker.RoyalFlushCheck(pokerHand1).get("hasRoyalFlush");
@@ -25,7 +24,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "Royal flush");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
+
+    public static HashMap<String, Object> straightFlushComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasStraightFlush1 = (boolean) PokerHandChecker.StraightFlushCheck(pokerHand1).get("hasStraightFlush");
         boolean hasStraightFlush2 = (boolean) PokerHandChecker.StraightFlushCheck(pokerHand2).get("hasStraightFlush");
@@ -54,7 +59,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "better straight flush");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
+
+    public static HashMap<String, Object> fourOfAKindComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasFourOfAKind1 = (boolean) PokerHandChecker.FourOfAKindCheck(pokerHand1).get("hasFourOfAKind");
         boolean hasFourOfAKind2 = (boolean) PokerHandChecker.FourOfAKindCheck(pokerHand2).get("hasFourOfAKind");
@@ -94,8 +105,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "4 of a kind");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
 
+    public static HashMap<String, Object> fullHouseComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasFullHouse1 = (boolean) PokerHandChecker.FullHouseCheck(pokerHand1).get("hasFullHouse");
         boolean hasFullHouse2 = (boolean) PokerHandChecker.FullHouseCheck(pokerHand2).get("hasFullHouse");
@@ -135,7 +151,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "full house");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
+
+    public static HashMap<String, Object> flushComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasFlush1 = (boolean) PokerHandChecker.FlushCheck(pokerHand1).get("hasFlush");
         boolean hasFlush2 = (boolean) PokerHandChecker.FlushCheck(pokerHand2).get("hasFlush");
@@ -165,7 +187,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "flush");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
+
+    public static HashMap<String, Object> straightComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasStraight1 = (boolean) PokerHandChecker.StraightCheck(pokerHand1).get("hasStraight");
         boolean hasStraight2 = (boolean) PokerHandChecker.StraightCheck(pokerHand2).get("hasStraight");
@@ -193,7 +221,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "straight");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
+
+    public static HashMap<String, Object> threeOfAKindComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasThreeOfAKind1 = (boolean) PokerHandChecker.ThreeOfAKindCheck(pokerHand1).get("hasThreeOfAKind");
         boolean hasThreeOfAKind2 = (boolean) PokerHandChecker.ThreeOfAKindCheck(pokerHand2).get("hasThreeOfAKind");
@@ -235,8 +269,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "3 of a kind");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
 
+    public static HashMap<String, Object> twoPairComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasTwoPair1 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand1).get("hasTwoPair");
         boolean hasTwoPair2 = (boolean) PokerHandChecker.TwoPairCheck(pokerHand2).get("hasTwoPair");
@@ -288,8 +327,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "2 pair");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
 
+    public static HashMap<String, Object> pairComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         boolean hasPair1 = (boolean) PokerHandChecker.PairCheck(pokerHand1).get("hasPair");
         boolean hasPair2 = (boolean) PokerHandChecker.PairCheck(pokerHand2).get("hasPair");
@@ -332,8 +376,13 @@ public class HandComparer {
             returnHashMap.put("result", 2);
             returnHashMap.put("reason", "pair");
             return returnHashMap;
+        } else {
+            return null;
         }
+    }
 
+    public static HashMap<String, Object> highCardComparison(PokerHand pokerHand1, PokerHand pokerHand2) {
+        HashMap<String, Object> returnHashMap = new HashMap<>();
 
         ArrayList<Card> highCard1 = PokerHandChecker.HighCardCheck(pokerHand1);
         ArrayList<Card> highCard2 = PokerHandChecker.HighCardCheck(pokerHand2);
@@ -352,6 +401,48 @@ public class HandComparer {
         returnHashMap.put("result", 0);
         returnHashMap.put("reason", "all same high cards");
         return returnHashMap;
+    }
+
+
+
+    public static HashMap<String, Object> compareTwoHands(PokerHand pokerHand1, PokerHand pokerHand2) {
+        if (royalFlushComparison(pokerHand1, pokerHand2)!=null) {
+            return royalFlushComparison(pokerHand1, pokerHand2);
+        }
+
+        if (straightFlushComparison(pokerHand1, pokerHand2)!=null) {
+            return straightFlushComparison(pokerHand1, pokerHand2);
+        }
+
+        if (fourOfAKindComparison(pokerHand1, pokerHand2) != null) {
+            return fourOfAKindComparison(pokerHand1,pokerHand2);
+        }
+
+        if (fullHouseComparison(pokerHand1, pokerHand2) != null) {
+            return fullHouseComparison(pokerHand1,pokerHand2);
+        }
+
+        if (flushComparison(pokerHand1, pokerHand2) != null) {
+            return flushComparison(pokerHand1,pokerHand2);
+        }
+
+        if (straightComparison(pokerHand1, pokerHand2) != null) {
+            return straightComparison(pokerHand1,pokerHand2);
+        }
+
+        if (threeOfAKindComparison(pokerHand1, pokerHand2) != null) {
+            return threeOfAKindComparison(pokerHand1,pokerHand2);
+        }
+
+        if (twoPairComparison(pokerHand1, pokerHand2) != null) {
+            return twoPairComparison(pokerHand1,pokerHand2);
+        }
+
+        if (pairComparison(pokerHand1, pokerHand2) != null) {
+            return pairComparison(pokerHand1,pokerHand2);
+        }
+
+        return highCardComparison(pokerHand1, pokerHand2);
     }
 
 
