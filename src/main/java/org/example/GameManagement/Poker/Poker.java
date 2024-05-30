@@ -21,6 +21,7 @@ public class Poker extends Game {
     ArrayList<Card> centralCards = new ArrayList<>();
     ArrayList<PokerPlayer> currentWinners = new ArrayList<>();
     String currentRoundReasonForWin;
+    boolean finalTurn=false;
 
 
     public Poker(String title, String rules) {
@@ -145,7 +146,7 @@ public class Poker extends Game {
                 playersInTheRound.get(positionOnTable).setHasBetThisRound(true);
                 positionOnTable = ((positionOnTable + 1) % (playersInTheRound.size()));
             } else {
-                System.out.println("Argh");
+                System.out.println("Something went wrong");
             }
 
             //checks if next player has bet already, if so, ends the betting round
@@ -162,6 +163,9 @@ public class Poker extends Game {
     }
 
     public ArrayList<PokerPlayer> playRound() {
+
+        finalTurn=false;
+
         //first betting round
         PokerUserMessages.firstRoundAnnouncement();
         if (playBettingRound(true)) {
@@ -199,6 +203,7 @@ public class Poker extends Game {
 
 
         //decide the winner (if there has not been one already)
+        finalTurn=true;
         return decideWinner();
 
     }
@@ -206,20 +211,26 @@ public class Poker extends Game {
     public void resetBets() {
         for (PokerPlayer player : players) {
             player.setPlayerCurrentBet(0);
-            System.out.println(player.getChips());
         }
     }
 
     public void roundSummary() {
+        System.out.println("------------------");
         System.out.println("Round is finished");
         System.out.println("Winner(s) were: ");
         int winnings = (currentPot / currentWinners.size());
-        for (PokerPlayer winner : currentWinners) {
-            System.out.println(winner.getName() + " with: " + currentRoundReasonForWin);
-            if (winner.totalHandWithCentralCards.pokerHand.isEmpty()) {
-                drawManyCards(winner.pokerhand.pokerHand);
-            } else{
-                drawManyCards(winner.totalHandWithCentralCards.pokerHand);
+        if (finalTurn) {
+            for (PokerPlayer winner : currentWinners) {
+                System.out.println(winner.getName() + " with: " + currentRoundReasonForWin);
+                if (winner.totalHandWithCentralCards.pokerHand.isEmpty()) {
+                    drawManyCards(winner.pokerhand.pokerHand);
+                } else{
+                    drawManyCards(winner.totalHandWithCentralCards.pokerHand);
+                }
+            }
+        } else {
+            for (PokerPlayer winner : currentWinners) {
+                System.out.println(winner.getName());
             }
         }
         System.out.println("They won " + winnings);
