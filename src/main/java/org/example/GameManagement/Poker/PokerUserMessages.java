@@ -6,6 +6,8 @@ import org.example.utils.UserMessages;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static org.example.ASCIIArt.DrawCards.drawManyCards;
+
 public class PokerUserMessages extends UserMessages {
 
     public static Integer getNumberOfPlayers() {
@@ -64,9 +66,7 @@ public class PokerUserMessages extends UserMessages {
         UserMessages.getUserPressEnterResponse("Press enter to see the cards");
         System.out.println("--------------------------------------------------");
         System.out.println("                    Cards are                     ");
-        for (Card card : cards) {
-            System.out.println(card);
-        }
+        drawManyCards(cards);
         System.out.println("--------------------------------------------------");
         UserMessages.getUserPressEnterResponse("Press enter to begin betting");
     }
